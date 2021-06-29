@@ -4,9 +4,9 @@ https://leetcode.com/problems/count-square-submatrices-with-all-ones/
 
 Look at the example below with the code,
 
-- When i and j is 0:
+- When i and j are 0:
   the result accumulates the initial value, either 1 or 0
-- When i and j is above 0, and the element itself is not 0:
+- When i and j are above 0, and the element itself is not 0:
   the result is accumulated based on the minimum value of its neighbours + the initial value
 
 ```
