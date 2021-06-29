@@ -1,4 +1,5 @@
-# [1641.Count Sorted Vowel Strings] (<https://leetcode.com/problems/count-sorted-vowel-strings/>)
+# 1641.Count Sorted Vowel Strings
+https://leetcode.com/problems/count-sorted-vowel-strings/
 
 Let's look at the vowels from "u", "o", "i", "e", "a"
 When n = 1, the strings consist of vowels 1, 1, 1, 1, 1
