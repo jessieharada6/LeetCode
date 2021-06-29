@@ -14,4 +14,4 @@ We can omit the first the last element.
 For tbe first element, the l+ and l- are 0.
 For the last element, the r+ and r- are 0
 
-Then, we sum all values by (l+ _ r-) + (l- _ r+)
+Then, we sum all values by (l+ * r-) + (l- * r+)
