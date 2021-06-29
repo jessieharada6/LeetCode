@@ -13,5 +13,7 @@ We can make a table as below:
 | 3   | 1   | 3   | 6   | 10  | 15  |
 
 Let's initiate an array of 5 elements, with base values of 1.
+
 The updated dp[i] = the previous dp[i] + the updated dp[i - 1]
+
 i.e., dp[i] = dp[i] + dp[i - 1]
