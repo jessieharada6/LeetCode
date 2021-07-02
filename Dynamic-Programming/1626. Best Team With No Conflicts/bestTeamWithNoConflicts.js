@@ -8,8 +8,9 @@ var bestTeamScore = function (scores, ages) {
     let pairArr = ages.map((val, index) => [val, scores[index]]);
     // console.log(pairArr)
     pairArr.sort((a, b) => {
+        // if same age
         if (a[0] === b[0]) {
-            // if same age, higher scores go first
+            // return higher scores first
             return b[1] - a[1];
         }
         // descend age
@@ -37,4 +38,47 @@ var bestTeamScore = function (scores, ages) {
     }
 
     return max;
+};
+
+
+
+/**
+ * @param {number[]} scores
+ * @param {number[]} ages
+ * @return {number}
+ */
+var bestTeamScore = function (scores, ages) {
+    let pairArr = scores.map((val, index) => [val, ages[index]]);
+    //[score, age]
+    pairArr.sort((a, b) => {
+        if (a[1] === b[1]) {
+            return b[0] - a[0];
+        }
+        return b[1] - a[1];
+    })
+
+    let newScore = [];
+    for (const score of pairArr) {
+        newScore.push(score[0]);
+    }
+    let n = newScore.length;
+
+    // can't let dp = newScore
+    // as it creates a shallow copy
+    // it will modify values in  newScore when we modify dp
+    let dp = new Array(n).fill(0);
+    for (let i = 0; i < n; i++) {
+        dp[i] = newScore[i];
+    }
+
+    for (let i = 0; i < n; i++) {
+        let s = newScore[i];
+        for (let j = 0; j < i; j++) {
+            if (s <= newScore[j]) {
+                dp[i] = Math.max(dp[i], s + dp[j]);
+            }
+        }
+    }
+
+    return Math.max(...dp);
 };
