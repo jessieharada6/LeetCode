@@ -16,6 +16,9 @@ var generateParenthesis = function (n) {
 
         if (openC < n) {
             stack.push("(");
+            // 1. openC++: maximum stack 
+            //    stack.push("("); RangeError: Maximum call stack size exceeded
+            // 2. openC += 1: add to 1 immediantly, will not start from 0
             backtrack(openC + 1, closedC);
             // global var, we won't carry
             stack.pop();
