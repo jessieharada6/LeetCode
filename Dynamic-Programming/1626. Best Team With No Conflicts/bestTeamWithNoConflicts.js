@@ -74,6 +74,9 @@ var bestTeamScore = function (scores, ages) {
     for (let i = 0; i < n; i++) {
         let s = newScore[i];
         for (let j = 0; j < i; j++) {
+            // must consider =, 
+            // for the same score, 
+            // we want to compare the max
             if (s <= newScore[j]) {
                 dp[i] = Math.max(dp[i], s + dp[j]);
             }
