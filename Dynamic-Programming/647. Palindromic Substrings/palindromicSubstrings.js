@@ -25,3 +25,25 @@ var countSubstrings = function (s) {
         // while loop ends, i moves to the next index
     }
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var countSubstrings = function (s) {
+    let count = 0;
+    for (let i = 0; i < s.length; i++) {
+        countP(i, i); // odd
+        countP(i, i + 1); // even
+    }
+    return count;
+
+
+    function countP(l, r) {
+        while (l >= 0 && r < s.length && s[l] === s[r]) {
+            count++;
+            l--;
+            r++;
+        }
+    }
+};
