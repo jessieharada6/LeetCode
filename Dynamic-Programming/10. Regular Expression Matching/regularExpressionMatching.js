@@ -11,7 +11,9 @@ var isMatch = function (s, p) {
         dp[i] = new Array(n + 1).fill(false)
     }
 
+    // for the first line
     dp[0][0] = true;
+    // It is guaranteed for each appearance of the character '*', there will be a previous valid character to match. - so can start from index 2
     for (let i = 2; i < n + 1; i++) {
         // * represents the 0 element
         if (p[i - 1] === "*") dp[0][i] = dp[0][i - 2];

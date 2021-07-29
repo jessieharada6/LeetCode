@@ -15,3 +15,4 @@ The updated dp:
 [ 1, 1, 2 ]
 
 2 is based on initial value (at the second row) + the updated dp[i - 1]
+
