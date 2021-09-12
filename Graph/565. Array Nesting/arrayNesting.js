@@ -20,3 +20,25 @@
     
     return max;
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var arrayNesting = function(nums) {
+    let max = 0;
+    
+    for (let i = 0; i < nums.length; i++) {
+        let size = 0;
+        let index = i;
+        while (nums[index] >= 0) {
+            size++;
+            let prev = index;
+            index = nums[index];
+            nums[prev] = -1;
+        }
+        max = Math.max(max, size);
+    }
+    
+    return max;
+};
