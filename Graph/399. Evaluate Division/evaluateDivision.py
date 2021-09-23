@@ -131,7 +131,7 @@ class Solution:
                     if weight != -1.0:
                         return graph[src][y] * weight
             
-            visited.remove(src);
+            visited.remove(src)
             return -1.0
         
         for (x, y) in queries:
