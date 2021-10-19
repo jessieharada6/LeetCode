@@ -24,7 +24,7 @@ class Solution:
                     # thats what we are looking for
                     for each_cell in each_row:
                         if len(each_cell) == n:
-                            #every element in the each_cell string must meet the condition
+                            #every element in the each_cell string must meet the condition IN ORDER
                             if all(each_cell[i] == w[i] or each_cell[i] == ' ' for i in range(n)):
                                 return True
         return False
