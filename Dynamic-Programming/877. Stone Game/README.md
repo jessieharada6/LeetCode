@@ -8,3 +8,6 @@ Approach:
 A method to define the current max and splice the array accordingly
 Calculate the stones that Alex and Lee have on hand
 Compare the final outcomes
+
+Useful link:
+https://www.youtube.com/watch?v=uhgdXOlGYqE
