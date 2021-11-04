@@ -23,7 +23,7 @@
         } 
         
         output = Math.max(output, right - left + 1);
-        // if add right++ before output, then output will be added one mroe time
+        // if add right++ before output, then output will be added one more time
         right++;
     }
     
