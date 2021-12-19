@@ -44,3 +44,38 @@ class Solution:
                     l = r
             
         return output
+
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        output = []
+        w = len(words[0])
+        
+        count = {}
+        for word in words:
+            count[word] = count.get(word, 0) + 1
+        
+        for i in range(w):
+            window = {}
+            l = r = i
+            
+            while r < len(s):
+                cur = s[r : r + w]
+                
+                if cur in count:
+                    window[cur] = window.get(cur, 0) + 1
+                    
+                    if window[cur] <= count[cur]:
+                        r += w
+                    else:
+                        while l <= r and window[cur] > count[cur]:
+                            spit_word = s[l : l + w]
+                            window[spit_word] -= 1
+                            l += w
+                        r += w
+                    if window == count:
+                        output.append(l)
+                else:
+                    window.clear()
+                    r += w
+                    l = r
+        return output
