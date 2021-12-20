@@ -6,13 +6,15 @@ class Solution:
         # l and r may overlap, let l <= r
         while l <= r:
             # // floor division
-            # r + (l - r) // 2 (instead of (l + r) // 2) to avoid overflow
-            m = r + (l - r) // 2
+            # l + (r - l) // 2 (instead of (l + r) // 2) to avoid overflow
+            m = l + (r - l) // 2
 
             # use m as the point to determine if target is in the list
             if nums[m] == target:
                 return m
             
+            # determine on the sorted side
+            # as binary search only works if the list is sorted
             # left hand side is sorted
             if nums[l] <= nums[m]: 
                 if nums[l] <= target <= nums[m]:
