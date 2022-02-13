@@ -43,6 +43,12 @@ class Solution:
             for i in range(len(subsets)):
                 # i.e. subsets.append(subsets[i] + [num])
                 subsets += [subsets[i] + [num]]
+                # subsets += [subsets[i] + [num]]:
+                # [[]] += [[1]]
+                # [[], [1]] += [[2], [1, 2]]
+                # [subsets[i] + [num]]:
+                # [[] + [1]]
+                # [[1] + [2]]
                 
         return subsets
 
