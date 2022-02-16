@@ -42,9 +42,3 @@ class Solution:
         
         return head.next
         
-       
-        
-        
-        
-    
-        

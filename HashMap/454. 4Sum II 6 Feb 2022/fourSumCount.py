@@ -68,4 +68,27 @@ class Solution:
         return output
                 
         
+
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        output = 0
+        lMap = {}
+        rMap = {}
+        
+        for v1 in nums1:
+            for v2 in nums2:
+                sum = v1 + v2
+                lMap[sum] = lMap.get(sum, 0) + 1
+        
+        for v3 in nums3:
+            for v4 in nums4:
+                sum = v3 + v4
+                # v1 + v2 = 0 - (v3 + v4)
+                # i.e. number of (v1 + v2) * number of -(v3 + v4) 
+                # i.e. number of (v1 + v2) * number of (v1 + v2)
+                output += lMap.get(-sum, 0)
+        
+        return output
+        
+        
         
