@@ -6,8 +6,11 @@ class Solution:
         
         # logic:
         # the interval will be at least 1
-        # use the starting point to compare
-        prev = intervals[0][0]
+        # use the -1 as the starting point to compare
+        # as long as right point > current right point, a new interval is needed
+
+        # as element value starts from 0
+        prev = -1
         
         for _, r in intervals:
             if r > prev:
@@ -22,13 +25,12 @@ class Solution:
     def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
         output = len(intervals)
         
-        # compare based on the ending
         # sort first element ascending
-        # if first element is the same, sort second element descending
+        # if the first element is the same, sort the second element descending
         intervals.sort(key = lambda x:(x[0], -x[1]))
         # print(intervals)
         
-        prev = intervals[0][0]
+        prev = -1
         
         for _, r in intervals:
             # update current max for r
