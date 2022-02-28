@@ -1,3 +1,25 @@
+# simplified solution
+class Solution:
+    def corpFlightBookings(self, bookings: List[List[int]], n: int) -> List[int]:
+        result = [0 for _ in range(n)]
+        difference = [0 for _ in range(n)]
+        
+        for first, last, seats in bookings:
+            if first - 1 >= 0:
+                difference[first - 1] += seats
+            if last < n:
+                difference[last] -= seats
+        
+
+        result[0] = difference[0]
+        
+        for i in range(1, n):
+            result[i] = difference[i] + result[i - 1]
+            
+        return result
+
+
+# original class
 class DiffInArray: 
     def __init__(self, nums):
         self.nums = nums
