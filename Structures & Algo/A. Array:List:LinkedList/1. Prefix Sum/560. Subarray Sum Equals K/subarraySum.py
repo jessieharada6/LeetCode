@@ -1,6 +1,6 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        # prefix sum base case
+        # prefix sum base case: an element itself is k
         preSum = {0: 1}
         current = 0
         res = 0
@@ -17,6 +17,6 @@ class Solution:
             # current hashMap
             preSum[current] = preSum.get(current, 0) + 1
         
-        print(preSum)
+        # print(preSum)
         
         return res
