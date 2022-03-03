@@ -1,21 +1,20 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         # prefix sum base case: an element itself is k
-        preSum = {0: 1}
-        current = 0
-        res = 0
+        prefix = {0: 1}
+        sum = 0
+        output = 0
         
         for num in nums:
             # current prefix sum
             # hashMap records the prefix sum before the current num is added up
-            current += num
-            diff = current - k
-
-            if diff in preSum:
-                res += preSum[diff]
+            sum += num
+            
+            if sum - k in prefix:
+                output += prefix[sum - k]
             
             # current hashMap
-            preSum[current] = preSum.get(current, 0) + 1
+            prefix[sum] = prefix.get(sum, 0) + 1
         
         # print(preSum)
         
