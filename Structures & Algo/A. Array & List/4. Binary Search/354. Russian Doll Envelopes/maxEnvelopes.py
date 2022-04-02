@@ -14,15 +14,17 @@ class Solution:
             for i in range(len(nums)):
                 l = 0
                 r = piles
-                # print(l, r, i, piles, top)
                 while l < r:
                     m = l + floor((r - l) / 2)
                     if top[m] >= nums[i]:
                         r = m
                     else:
                         l = m + 1
-                # while exits when l == r, i.e. l == piles
+                # print(l, r, piles, i, top)
+                # loop exits when l == r
+                # only when top[m] < nums[i], l == piles
                 if l == piles:
+                    # print(l, piles)
                     piles += 1
                 top[l] = nums[i]
             # print(top)
