@@ -1,5 +1,28 @@
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        q = collections.deque()
+        l = r = 0
+        ans = []
+        
+        while r < len(nums):
+            # when the min is smaller than the current num
+            # constantly pop in the same window, leave the max
+            while q and nums[q[-1]] < nums[r]: 
+                q.pop()
+            q.append(r) # append index
+            
+            if l > q[0]: ## not while as we care about the max, and the while loop above will take care of the max
+                q.popleft() 
+                
+            if r >= k - 1:
+                ans.append(nums[q[0]])
+                l += 1 # start a new window
+            r += 1
+        
+        return ans
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         l = r = 0
         ans = []
         q = collections.deque()
@@ -13,7 +36,8 @@ class Solution:
                 ans.append(nums[q[0]])
                 l += 1 # slide 
             
-            if l > q[0]: #  new starting point of l -> q[0] out of range 
+            #  new starting point of l -> q[0] out of range 
+            if l > q[0]: 
                 q.popleft()
             
             r += 1
