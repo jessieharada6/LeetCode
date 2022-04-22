@@ -1,5 +1,23 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        map = {
+            "(": ")",
+            "[": "]",
+            "{": "}"
+        }
+        stack = []
+        
+        for b in s:
+            if b in map:
+                stack.append(b)
+            else:
+                if stack == [] or map[stack.pop()] != b:
+                    return False
+        
+        return stack == []
+        
+class Solution:
+    def isValid(self, s: str) -> bool:
         stack = []
         map = {
             "(": ")",

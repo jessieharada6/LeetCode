@@ -15,7 +15,7 @@ class Solution:
                 if b == ")":
                     right -= 1 
                     if right == -1: # ) 
-                        right = 1   # ))
+                        right = 1   # )) as we have )), so need to be 1 to deduct
                         res += 1    # ())
 
         return res + right
