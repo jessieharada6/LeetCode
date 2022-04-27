@@ -20,3 +20,25 @@ class Solution:
                 l = m + 1
         
         return l
+
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        l = 1           # 1 instead of min(piles) for case of [312884470]: 312884469 hours
+        r = max(piles)
+
+        def getHours(num):
+            hours = 0
+            for p in piles:
+                hours += ceil(p / num)
+            return hours
+        
+        while l <= r:
+            m = l + (r - l)//2
+            if getHours(m) <= h:
+                r = m - 1
+            else:
+                l = m + 1
+        
+        return l
+        
+        
