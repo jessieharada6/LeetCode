@@ -1,24 +1,22 @@
 class Solution:
-    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:    
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
         n = 0
         for _, _, to in trips:
-            if n < to:
-                n = max(n, to)
+            n = max(to, n)
         
-        difference = [0 for _ in range(n)]
-        
+        diff = [0 for _ in range(n)]
         for p, f, t in trips:
-            difference[f] += p
+            diff[f] += p
             if t < n:
-                difference[t] -= p
+                diff[t] -= p
         
-        passengers = 0
-        for d in difference:
-            passengers += d
-            if passengers > capacity:
+        p = 0
+        for d in diff:
+            p += d
+            if p > capacity:
                 return False
         
-        return True
+        return True 
 
 
 class DiffInArray:

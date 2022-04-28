@@ -1,22 +1,19 @@
 # simplified solution
 class Solution:
     def corpFlightBookings(self, bookings: List[List[int]], n: int) -> List[int]:
-        result = [0 for _ in range(n)]
-        difference = [0 for _ in range(n)]
+        diff = [0 for _ in range(n)]
+        ans = [0 for _ in range(n)]
         
-        for first, last, seats in bookings:
-            if first - 1 >= 0:
-                difference[first - 1] += seats
-            if last < n:
-                difference[last] -= seats
+        for f, l, s in bookings:
+            diff[f - 1] += s                # not needed to check f - 1 >= 0, as f starts from 1
+            if l < n:
+                diff[l] -= s
         
-
-        result[0] = difference[0]
-        
+        ans[0] = diff[0]
         for i in range(1, n):
-            result[i] = difference[i] + result[i - 1]
-            
-        return result
+            ans[i] += ans[i - 1] + diff[i]
+
+        return ans
 
 
 # original class

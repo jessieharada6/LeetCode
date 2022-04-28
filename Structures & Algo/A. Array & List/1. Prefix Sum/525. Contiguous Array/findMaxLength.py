@@ -14,3 +14,20 @@ class Solution:
                 prefix[sum] = i
         
         return output
+
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        s = {0: -1}
+        sum = 0
+        ans = 0
+        
+        for i in range(len(nums)):
+            sum += -1 if nums[i] == 0 else nums[i]
+            
+            if sum in s:
+                ans = max(ans, i - s[sum])
+            
+            if sum not in s:
+                s[sum] = i
+        
+        return ans
