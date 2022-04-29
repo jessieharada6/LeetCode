@@ -10,7 +10,7 @@ class Solution:
         valid = 0
         while r < len(s):
             c = s[r]
-            r += 1
+            r += 1                              # increment so in the next loop, c gets updated
             if c in need:
                 have[c] = have.get(c, 0) + 1
                 if need[c] == have[c]:
