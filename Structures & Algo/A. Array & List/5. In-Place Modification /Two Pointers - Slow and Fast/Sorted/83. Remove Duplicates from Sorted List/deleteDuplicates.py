@@ -8,6 +8,23 @@ class Solution:
         if head is None or head.next is None:
             return head
         
+        l = head
+        r = head.next
+        dummy = l
+        while r:
+            if r.val != l.val:
+                l = l.next
+                l.val = r.val
+            r = r.next
+        
+        l.next = None
+        return dummy
+
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None:
+            return head
+        
         slow = head
         fast = slow.next
         
