@@ -18,15 +18,16 @@ class Solution:
                                 # and go through the while loop below each time
         self.flatten(root.left)
         self.flatten(root.right)
+
+                                # flattened left and right tree
         
         l = root.left
         r = root.right
-        
-                                # root connects to the left
-        root.left = None
-        root.right = l
+                                
+        root.left = None        
+        root.right = l          # root connects to the left
         
         while root.right:
             root = root.right   # traverse 
                                 # find the next position
-        root.right = r
+        root.right = r          # connect the right side of the tree
