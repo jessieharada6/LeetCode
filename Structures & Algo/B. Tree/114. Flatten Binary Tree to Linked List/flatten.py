@@ -31,3 +31,48 @@ class Solution:
             root = root.right   # traverse 
                                 # find the next position
         root.right = r          # connect the right side of the tree
+
+
+class Solution:
+    def __init__(self):
+        self.prev = None
+        
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        
+        if root is None:
+            return
+
+        self.flatten(root.right)
+        self.flatten(root.left)
+
+        root.right = self.prev
+        root.left = None
+        self.prev = root        # get sorted root
+
+
+# 	root
+#     / 
+#   1 
+#  / \ 
+# 3  4  
+# Let's see what is happening with this code.
+
+# Node(4).right = None
+# Node(4).left = None
+# prev = Node(4)
+
+# Node(3).right = Node(4) (prev)
+# Node(3).left = None
+# prev = Node(3)->Node(4)
+
+# Node(1).right = prev = Node(3) -> Node(4)
+# Node(1).left = None
+# prev = Node(1)->Node(3)->Node(4) (Which is the answer)
+
+# The answer use self.prev to recode the ordered tree of the right part of current node.
+# Remove the left part of current node
+
+# explaination from https://leetcode.com/problems/flatten-binary-tree-to-linked-list/discuss/37154/8-lines-of-python-solution-(reverse-preorder-traversal)

@@ -32,3 +32,18 @@ class Solution:
         connectTwo(root.left, root.right)
 
         return root
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if root is None:
+            return root
+        
+        if root.left is not None:                            # connect nodes under the same root
+            root.left.next = root.right
+        if root.right is not None and root.next is not None: # connect nodes under different roots
+            root.right.next = root.next.left
+        
+        self.connect(root.left)
+        self.connect(root.right)
+        
+        return root

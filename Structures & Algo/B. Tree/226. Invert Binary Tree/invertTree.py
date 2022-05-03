@@ -4,6 +4,19 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None:
+            return root
+        
+        root.left, root.right = root.right, root.left
+        
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        
+        return root
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
@@ -17,6 +30,7 @@ class Solution:
         self.invertTree(root.right)
  
         return root
+        
 
 # it is okay to traverse in preorder or postorder 
 # it is not okay to traverse in inorder
