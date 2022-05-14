@@ -19,3 +19,20 @@ class Solution:
             return max(l, r) + 1                # every node: max depth - either left or right
         
         return depth(root)
+
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        d = 0
+        def depth(root):
+            nonlocal d
+            if root is None:
+                return 0
+            
+            l = depth(root.left)
+            r = depth(root.right)
+            
+            d = max(d, l + r)
+            
+            return max(l, r) + 1
+        depth(root)
+        return d
