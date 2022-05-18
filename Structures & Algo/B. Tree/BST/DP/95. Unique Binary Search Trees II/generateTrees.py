@@ -12,6 +12,27 @@
 #         self.right = right
 class Solution:
     def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        def build(lo, hi):
+            trees = []
+            if lo > hi:
+                trees.append(None)
+            
+            for r in range(lo, hi + 1):
+                left = build(lo, r - 1)
+                right = build(r + 1, hi)
+                
+                for _l in left:
+                    for _r in right:
+                        root = TreeNode(r)
+                        root.left = _l
+                        root.right = _r
+                        trees.append(root)
+            return trees                                # update built trees
+        
+        return build(1, n)
+        
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
         def build(l, r):
             trees = []
             if l > r:
@@ -31,3 +52,4 @@ class Solution:
             return trees
         
         return build(1, n)
+
