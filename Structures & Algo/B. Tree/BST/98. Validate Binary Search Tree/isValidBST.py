@@ -47,7 +47,19 @@ class Solution:
         traverse(root)
         return invalid is None
 
-
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def isValid(root, lo, hi):
+            if root is None:
+                return True
+            
+            if root.val <= lo or root.val >= hi:
+                return False
+            
+            return isValid(root.left, lo, root.val) and isValid(root.right, root.val, hi)
+        
+        return isValid(root, -inf, inf)
+        
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         def isValidBST(root, lower, upper):
