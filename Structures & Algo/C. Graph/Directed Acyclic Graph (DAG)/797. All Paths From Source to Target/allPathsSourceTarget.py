@@ -16,7 +16,7 @@ class Solution:
                 path.pop()
                 
         
-        traverse(0)
+        traverse(0)                                 # define starting point e.g. from node 0 to node n - 1 so starting point is 0
         return paths
 
 class Solution:
