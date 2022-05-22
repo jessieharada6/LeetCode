@@ -40,3 +40,23 @@ class Solution:
         
         traverse(0)
         return paths
+
+class Solution:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        paths = []
+        path = []
+        def traverse(node):
+            path.append(node)
+            
+            if node == len(graph) - 1:
+                paths.append(path[:])
+                path.pop()
+                return
+            
+            for n in graph[node]: 
+                traverse(n)
+                
+            path.pop() 
+        
+        traverse(0)             
+        return paths
