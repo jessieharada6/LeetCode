@@ -60,4 +60,39 @@ class Solution:
                     queue.append(n)
         
         return order if count == numCourses else []
+
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = defaultdict(list)
+        for a, b in prerequisites:
+            graph[b].append(a)
+        onPath = [False for _ in range(numCourses)]
+        visited = [False for _ in range(numCourses)]
+        hasCycle = False
+        courses = []
+        
+        def traverse(node):
+            nonlocal hasCycle 
+            if onPath[node]:
+                hasCycle = True
+                return
+            if visited[node] or hasCycle:
+                return
+            
+            onPath[node] = True
+            visited[node] = True
+            # print("pre", node)              # similar to root, left, right, so orders not guaranteed
+            for n in graph[node]:
+                traverse(n)
+            # print("post", node)             # similar to right, left, root, so order is reversed
+            courses.append(node)
+            onPath[node] = False
+        
+        for i in range(numCourses):
+            traverse(i)
+        # print(courses)
+        if hasCycle:
+            return []
+        return courses[::-1]
                 
