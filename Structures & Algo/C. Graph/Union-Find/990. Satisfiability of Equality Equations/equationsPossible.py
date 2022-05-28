@@ -27,11 +27,11 @@ class UF:
         rootP = self.find(p)
         rootQ = self.find(q)
         
-        if self.weight[p] > self.weight[q]:
-            self.parent[rootQ] = self.parent[rootP]
+        if self.weight[rootP] > self.weight[rootP]:
+            self.parent[rootQ] = rootP
             self.weight[rootP] += self.weight[rootQ]
         else:
-            self.parent[rootP] = self.parent[rootQ]
+            self.parent[rootP] = rootQ
             self.weight[rootQ] += self.weight[rootP]
         
     def connected(self, p, q):

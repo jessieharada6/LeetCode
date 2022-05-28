@@ -11,7 +11,7 @@ class UF:
         rootP = self.find(p)
         rootQ = self.find(q)
         
-        if self.weight[p] > self.weight[q]:
+        if self.weight[rootP] > self.weight[rootP]:
             self.parent[rootQ] = rootP
             self.weight[rootP] += self.weight[rootQ]
         else:
