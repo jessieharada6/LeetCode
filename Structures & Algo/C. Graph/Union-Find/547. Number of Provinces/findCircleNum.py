@@ -17,7 +17,7 @@ class UF:
     def __init__(self, n):
         self.count = n
         self.parent = [i for i in range(n)]
-        self.size = [1 for _ in range(n)]
+        # self.size = [1 for _ in range(n)]
     
     def find(self, x):
         if self.parent[x] != x:

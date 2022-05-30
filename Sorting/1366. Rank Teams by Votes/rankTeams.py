@@ -19,7 +19,7 @@ class Solution:
         # ['A', 'B', 'C']
         print(sorted_counts) 
         
-        # key=lambda x: counts[x]
+        # key=lambda x: counts[x]  - go by columns - A, B, C for column 1 is 5, 0, 0; A, B, C for column 2 is 0, 2, 3
         # sort based on the ranking of each letter starting from index 0
         # normal sorting is ascending, but we need it for descending (larger number in the index represents higher ranking)
         return "".join(sorted(sorted_counts, key=lambda char: counts[char], reverse=True))
