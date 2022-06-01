@@ -88,7 +88,7 @@ class Solution:
             return abs(x[0] - y[0]) + abs(x[1] - y[1])
         
         vertices = [(0, (0, 0))]          
-        visited = set()
+        visited = set()                 # don't need to add 0 before the while loop, as it will never reach the for loop
         n = len(points)
         ans = 0
         

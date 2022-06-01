@@ -48,12 +48,12 @@ class Solution:
         visited = [False for _ in range(n)]
         connections = 0
         
-        def traverse(node):
+        def traverse(node):                 # node is like outer loop
             if visited[node]:
                 return
             
             visited[node] = True
-            
+                                            # i is like inner loop
             for i in range(n):              # not isConnected[node] -> looking horizontally, it is job for dfs
                 if not visited[i] and isConnected[node][i] == 1:
                     traverse(i)
