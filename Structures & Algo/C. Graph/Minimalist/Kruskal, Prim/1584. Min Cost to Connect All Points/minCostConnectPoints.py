@@ -109,35 +109,37 @@ class Solution:
 
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
-        def manhattan(x, y):
+        def m(x, y):
             return abs(x[0] - y[0]) + abs(x[1] - y[1])
         
         n = len(points)
-        graph = collections.defaultdict(list)
+        graph = defaultdict(list)
         for i in range(n):
             for j in range(i + 1, n):
-                cost = manhattan(points[i], points[j])          # use cost to make heap
-                graph[i].append((cost, j))
-                graph[j].append((cost, i))
+                cost = m(points[i], points[j])      # use cost to make heap
+                graph[i].append((cost, j))          # nodes to each other
+                graph[j].append((cost, i))          # nodes to each other
+                
         
-        # print(graph[0])
-        ans, visited, heap = 0, set(), graph[0]
+        # print(graph)
         
-        visited.add(0)
+        mst = 0
+        heap = graph[0]                             # a random point
         heapq.heapify(heap)
-
+        visited = set()
+        visited.add(0)                              # mark what's in the heap as visited as it is nodes to each other, if mark inside the loop, some nodes can never be reached and lead to while true loop
+        
         while len(visited) < n:
             cost, to = heapq.heappop(heap)
             
             if to in visited:
                 continue
             
+            mst += cost
             visited.add(to)
-            ans += cost
             
-            for new_to in graph[to]:
+            for c, new_to in graph[to]:
                 if new_to not in visited:
-                    heapq.heappush(heap, new_to)
-
-        return ans
-                    
+                    heapq.heappush(heap, (c, new_to))
+        
+        return mst

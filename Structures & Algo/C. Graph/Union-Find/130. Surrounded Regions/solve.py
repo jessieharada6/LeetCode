@@ -61,15 +61,14 @@ class Solution:
         d = [[1, 0], [0, 1], [0, -1], [-1, 0]]
         for i in range(1, m - 1):
             for j in range(1, n - 1):
-                if board[i][j] == "O":
-                    # connect the "0" with neighbours
-                    for k in range(len(d)):
+                if board[i][j] == "O":          # if (i, j) = 0, find all neighbours 
+                    for k in range(len(d)):     # if (i, j) = (1, 1), x, y will be (1, 0), (0, 1), (2, 1), (2, 2)
                         x = i + d[k][0]
                         y = j + d[k][1]
                         # print("x:", i, k, d[k][0], x)
                         # print("y:",j, k, d[k][1], y)
-                        if board[x][y] == "O":
-                            uf.union(x * n + y, i * n + j)
+                        if board[x][y] == "O":  # if (x, y) = 0
+                            uf.union(x * n + y, i * n + j)  # 2d to 1d, and union
                             # print(x * n + y, i * n + j, n, x, y)
         
         for i in range(1, m - 1):
