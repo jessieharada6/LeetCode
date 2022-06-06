@@ -1,3 +1,5 @@
+## Dijkstra
+## positive distance due to the data strcuture used - heap
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
         INF = math.inf
@@ -57,4 +59,55 @@ class Solution:
         return max(dist) if max(dist) != math.inf else -1
 
 
-## 
+## spfa - Shortest Path Faster Algorithm - Bellman Ford 
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        edges = defaultdict(list)
+        for e in times:
+            edges[e[0] - 1].append((e[1] - 1, e[2]))       # with direction
+        print(edges)
+        dist = [math.inf for _ in range(n)]
+        start = k - 1
+        dist[start] = 0
+        
+        # visited = set()
+        
+        q = collections.deque()
+        q.append(start)
+        
+        while q:
+            cur = q.popleft()
+            print(cur)
+            
+            # if cur in visited:              # preventing from being revisited,                                           #     continue                    # rquired for graph with no directions
+            # visited.add(cur)
+            
+            for nei, d in edges[cur]:
+                if dist[cur] + d < dist[nei]:
+                    dist[nei] = dist[cur] + d
+                    q.append(nei)
+            print(q, dist)
+  
+        ans = max(dist)                                      # min time for all nodes to receive the signal
+        return ans if ans != math.inf else -1
+
+# Floyd
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        edges = [[math.inf for _ in range(n)] for _ in range(n)]
+        for col, row, cost in times:
+            edges[col - 1][row - 1] = cost
+        
+        for i in range(n):
+            edges[i][i] = 0
+        # print(edges)
+        
+        for start in range(n):
+            # print(start)
+            for x in range(n):
+                for y in range(n):
+                    # [1][3] = [1][2] + [2][3] 
+                    edges[x][y] = min(edges[x][y], edges[x][start] + edges[start][y]) 
+                    # print(x, start, y, edges[x][y])
+        # print(edges)
+        return max(edges[k - 1]) if max(edges[k - 1]) != math.inf else -1
