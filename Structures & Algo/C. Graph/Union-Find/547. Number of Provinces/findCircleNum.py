@@ -55,7 +55,7 @@ class Solution:
             visited[node] = True
                                             # i is like inner loop
             for i in range(n):              # not isConnected[node] -> looking horizontally, it is job for dfs
-                if not visited[i] and isConnected[node][i] == 1:
+                if not visited[i] and isConnected[node][i] == 1:    # not visited[i] equivalent to i != node
                     traverse(i)
         
         for c in range(n):
