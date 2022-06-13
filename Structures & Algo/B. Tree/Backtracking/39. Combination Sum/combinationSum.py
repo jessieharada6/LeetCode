@@ -12,7 +12,10 @@ class Solution:
                 paths.append(path[:])
                 return
             
-            for i in range(index, n):   ### note
+            # traverse left to right, index controls i's starting value, 
+            # so i won't go from 0 everytime -- if (index, n):[[2,2,3],[7]]
+            #                                 if just (n): [[2,2,3],[2,3,2],[3,2,2],[7]]
+            for i in range(index, n):   ### note     
                 path.append(candidates[i])
                 # The same number may be chosen from candidates an unlimited number of times. 
                 traverse(path, i, target - candidates[i])
