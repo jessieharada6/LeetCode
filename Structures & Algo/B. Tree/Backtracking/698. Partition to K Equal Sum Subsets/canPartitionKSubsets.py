@@ -66,7 +66,9 @@ class Solution:
                 used ^= 1 << i
                 
                 # sorting the num
-                while i + 1 < len(nums) and nums[i + 1] == nums[i]: # if two num is the same, use the next num
+                # current num can't satisfy the condition, next num of the same value can't either
+                # if two num is the same, use the next num
+                while i + 1 < len(nums) and nums[i + 1] == nums[i]: 
                     i += 1
 
             return False
