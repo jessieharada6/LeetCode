@@ -1,5 +1,30 @@
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        combinations = []
+        candidates.sort()
+        
+        def traverse(start, path, target):
+            if target < 0:
+                return
+            
+            if target == 0:
+                combinations.append(path[:])
+                return
+            
+            for i in range(start, len(candidates)):
+                if i > start and candidates[i - 1] == candidates[i]:
+                    continue
+                path.append(candidates[i])
+                traverse(i + 1, path, target - candidates[i])
+                path.pop()
+        
+        traverse(0, [], target)
+        return combinations
+        
+
+        
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         paths = []
         n = len(candidates)
         candidates.sort()           ### note
