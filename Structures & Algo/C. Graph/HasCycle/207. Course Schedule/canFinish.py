@@ -32,17 +32,17 @@ class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         graph = defaultdict(list)
         for a, b in prerequisites:
-            graph[b].append(a)
+            graph[b].append(a)                          # b depends on a
         
         indegree = [0 for _ in range(numCourses)]
-        for a, b in prerequisites:                      # a: to, b: from, a dependes on b
+        for a, b in prerequisites:                      # in each [], a has 1 node that depends on it # a: to, b: from, a dependes on b
             indegree[a] += 1
         # print(graph, indegree)
         
         q = []
         for i in range(numCourses):
-            if indegree[i] == 0:                        # indegree[i] = 0: no dependent ndoe
-                q.append(i)
+            if indegree[i] == 0:                        # indegree[i] = 0: no nodes depend on the current node
+                q.append(i)                             # add the course that has indegree of 0
         
         count = 0
         while q:
@@ -50,8 +50,8 @@ class Solution:
             count += 1
             for n in graph[cur]:
                 indegree[n] -= 1
-                if indegree[n] == 0:                    # all dependent node is traversed
-                    q.append(n)
+                if indegree[n] == 0:                    # all nodes that depend on cur are traversed
+                    q.append(n)                         # 
         
         return count == numCourses
             

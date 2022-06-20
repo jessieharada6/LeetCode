@@ -85,7 +85,7 @@ class Solution:
             # print("pre", node)              # similar to root, left, right, so orders not guaranteed
             for n in graph[node]:
                 traverse(n)
-            # print("post", node)             # similar to right, left, root, so order is reversed
+            # print("post", node)             # similar to left, right, root, so order is reversed
             courses.append(node)
             onPath[node] = False
         

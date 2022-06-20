@@ -17,11 +17,11 @@ class Solution:
         dist[start] = 0                             # update dist from start to start 
         
         heap = []
-        heapq.heappush(heap, (0, start))
+        heapq.heappush(heap, (0, start))            # cost (i.e k -> current node), current node
         
         while heap:
             d, cur = heapq.heappop(heap)
-            if d > dist[cur]:  
+            if d > dist[cur]:                       # found a shorter distance, d does not need to be considered
                 continue
             
             for nei, cost in graph[cur]:
@@ -65,7 +65,7 @@ class Solution:
         edges = defaultdict(list)
         for e in times:
             edges[e[0] - 1].append((e[1] - 1, e[2]))       # with direction
-        print(edges)
+
         dist = [math.inf for _ in range(n)]
         start = k - 1
         dist[start] = 0
