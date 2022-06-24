@@ -1,7 +1,22 @@
 class Solution:
     def minAddToMakeValid(self, s: str) -> int:
-        output = 0
-        stack = []
+        need = 0
+        insertions = 0
+        
+        for c in s:
+            if c == "(":
+                need += 1
+            else:
+                need -= 1
+                if need == -1:
+                    need = 0
+                    insertions += 1
+        return need + insertions
+
+class Solution:
+    def minAddToMakeValid(self, s: str) -> int:
+        output = 0  # needs of )
+        stack = []  # numbers of (
         
         for b in s:
             if b == "(":
@@ -30,20 +45,3 @@ class Solution:
                         res += 1
         
         return res + right
-
-class Solution:
-    def minAddToMakeValid(self, s: str) -> int:
-        left = 0
-        right = 0
-        
-        for b in s:
-            if b == "(":
-                left += 1
-            else:
-                if b == ")":
-                    left -= 1
-                    if left == -1:
-                        left = 0
-                        right += 1
-        
-        return left + right
