@@ -4,7 +4,6 @@ class Solution:
         
         def dp(coins, amount):
             if amount == 0: return 0 
-            
             if amount < 0: return -1
             
             if memo[amount] != -666:
