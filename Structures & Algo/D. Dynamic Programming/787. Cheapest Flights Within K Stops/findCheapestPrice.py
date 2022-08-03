@@ -23,8 +23,33 @@ class Solution:
             memo[s][k] = res
             return res
         
-        
         return dp(dst, k)
+
+class Solution:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        graph = defaultdict(list)
+        for f, t, p in flights:
+            graph[t].append((f, p))
+        # print(graph)
+        k += 1
+        memo = [[-2] * (k + 1) for _ in range(n)]
+        
+        def dp(s, k):
+            if s == src: return 0
+            if k == 0: return -1
+            res = math.inf
+            if memo[s][k] != -2: return memo[s][k]
+            
+            for (f, price) in graph[s]:
+                sub = dp(f, k - 1)
+                if sub != -1:
+                    res = min(res, sub + price)
+                # print(s, f, res)
+            memo[s][k] = res
+            return res
+        
+        res = dp(dst, k) 
+        return res if res != math.inf else -1
 
 
 # Dijkstra
