@@ -35,6 +35,31 @@ class Solution:
 
 
 # kmp
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        m = len(haystack)
+        n = len(needle)
+        
+        dp = [[0] * 256 for _ in range(n)]
+        dp[0][ord(needle[0])] = 1
+        x = 0
+        
+        for i in range(1, n):
+            for j in range(256):
+                if ord(needle[i]) == j:
+                    dp[i][j] = i + 1
+                else:
+                    dp[i][j] = dp[x][j]
+            x = dp[x][ord(needle[i])]
+        
+        state = 0
+        for i in range(m):
+            state = dp[state][ord(haystack[i])]
+            if state == n:
+                return i - n + 1
+        
+        return -1
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
         m = len(haystack)
