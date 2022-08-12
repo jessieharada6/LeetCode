@@ -1,23 +1,23 @@
 class Solution:
     def preimageSizeFZF(self, k: int) -> int:
-        def getTrailingZeros(n):
-            zeros = 0
+        def getZeros(n):
+            c = 0
             while n != 0:
-                current = n // 5
-                zeros += current
-                n = current
-            return zeros
+                f = n // 5
+                n = f
+                c += f
+            return c
         
         def getRange(left):
-            l = 0
-            r = int(10e9)
             i = -1
+            l = 0
+            r = 10 ** 10
             while l <= r:
                 m = l + (r - l) // 2
-                if getTrailingZeros(m) > k:
-                    r = m - 1
-                elif getTrailingZeros(m) < k:
+                if getZeros(m) < k:
                     l = m + 1
+                elif getZeros(m) > k:
+                    r = m - 1
                 else:
                     i = m
                     if left:
@@ -29,9 +29,9 @@ class Solution:
         l = getRange(True)
         r = getRange(False)
         
-        return r - l + 1 if l != -1 and r != -1 else 0
-        
+        return r - l + 1 if r != -1 and l != -1 else 0
 
+        
 class Solution:
     def preimageSizeFZF(self, k: int) -> int:           
         # 172. https://leetcode.com/problems/factorial-trailing-zeroes/submissions/
