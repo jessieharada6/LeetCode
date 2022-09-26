@@ -1,5 +1,27 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = [[] for _ in range(numCourses)]
+        indegree = [0] * numCourses
+        
+        for x, y in prerequisites:
+            graph[y].append(x)
+            indegree[x] += 1
+        
+        q = collections.deque(i for i, v in enumerate(indegree) if v == 0)
+        orders = []
+        
+        while q:
+            x = q.popleft()
+            orders.append(x)
+            for y in graph[x]:
+                indegree[y] -= 1
+                if indegree[y] == 0:
+                    q.append(y)
+        
+        return orders if len(orders) == numCourses else None
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = defaultdict(list)
         for a, b in prerequisites:
             graph[b].append(a)
