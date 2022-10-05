@@ -15,29 +15,3 @@ class Solution:
                 ans = (ans + s) % mod
         
         return ans  
-
-
-        class Solution:
-    def smallestDistancePair(self, nums: List[int], k: int) -> int:
-        def rank(val):
-            i, cnt = 0, 0
-            for j in range(1, len(nums)):
-                dist = nums[j] - nums[i]
-                if dist > k:
-                    i += 1
-                cnt += j - i
-                print(cnt, dist, i, j)
-            return cnt
-        
-        nums.sort()
-        l, r = 0, nums[-1] - nums[0]
-        while l < r:
-            m = l + (r - l) // 2
-            print(m)
-            if rank(m) < k:
-                l = m + 1
-            else:
-                r = m
-        
-        return l
-                
