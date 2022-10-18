@@ -1,9 +1,10 @@
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
-        cnt = Counter()
-        gd = 0
-        for i, n in enumerate(nums):
-            gd += cnt[n]
-            cnt[n] += 1
+        gd, cnt = 0, Counter()
+        
+        for num in nums:
+            gd += cnt[num]
+            cnt[num] += 1
         
         return gd
+            
