@@ -1,3 +1,28 @@
+
+class Solution:
+    def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
+        if k <= 1:        # strictly less than k [1,1,1,1] k = 1
+            return 0
+        
+        m = 1
+        ans = 0
+        l = 0
+        
+        for r, num in enumerate(nums):
+            m *= num
+            
+            # 进来前false
+            while m >= k:
+                m //= nums[l]
+                l += 1
+            # 出来后true
+            
+            
+            if m < k:
+                ans += (r - l + 1)
+        
+        return ans
+
 class Solution:
     def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
         # psum -> pproduct

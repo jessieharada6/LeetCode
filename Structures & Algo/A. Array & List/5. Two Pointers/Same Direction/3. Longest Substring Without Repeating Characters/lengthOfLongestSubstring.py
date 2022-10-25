@@ -7,15 +7,15 @@ class Solution:
         
         l = -1
         ans = 0
-        d = {}
+        pos = {}
+        
         for r, c in enumerate(s):
-            if c in d and l < d[c]:
-                l = d[c]
+            if c in pos and l < pos[c]:
+                l = pos[c]
             
             ans = max(ans, r - l)
-
-            d[c] = r
             
-            
+            pos[c] = r
+        
         return ans
         
