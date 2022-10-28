@@ -1,5 +1,59 @@
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
+        # 找到非负数
+        i = 0
+        for i, n in enumerate(nums):
+            if n >= 0:
+                break
+        j = i - 1
+        
+        ans = []
+        
+        while j >= 0 and i < len(nums):
+            if abs(nums[j]) < abs(nums[i]):
+                ans.append(nums[j] * nums[j])
+                j -= 1
+            else:
+                ans.append(nums[i] * nums[i])
+                i += 1
+        
+        while j >= 0:
+            ans.append(nums[j] * nums[j])
+            j -= 1
+        
+        while i < len(nums):
+            ans.append(nums[i] * nums[i])
+            i += 1
+        
+        return ans
+
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        # 找到非负数
+        i = 0
+        for i, n in enumerate(nums):
+            if n >= 0:
+                break
+        j = i - 1
+        
+        ans = []
+        
+        for idx in range(i, len(nums)):
+            # 用while款着 不然会去加nums[idx]
+            while j >= 0 and abs(nums[j]) < abs(nums[idx]):
+                ans.append(nums[j] * nums[j])
+                j -= 1
+
+            ans.append(nums[idx] * nums[idx])
+        
+        while j >= 0:
+            ans.append(nums[j] * nums[j])
+            j -= 1
+       
+        return ans
+
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
         # 已排序 
         
         # 特殊情况: 坑 - 只有一个数字 i会变成-1 unbound local error
@@ -53,7 +107,7 @@ class Solution:
         arr += nums2[j:]
         nums[:] = arr
         return nums
-        
+
        ################################################
        # 3. 以nums1为主体
        # 方法二

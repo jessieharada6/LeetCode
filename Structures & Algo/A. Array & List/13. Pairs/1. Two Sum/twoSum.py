@@ -34,6 +34,23 @@ class Solution:
 # pointers
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
+        i = 0
+        j = len(nums) - 1
+        
+        pair = sorted(zip(nums, range(len(nums))))
+
+        while i < j:
+            s = pair[i][0] + pair[j][0]
+            if s == target:
+                return [pair[i][1], pair[j][1]]
+            
+            if s < target:
+                i += 1
+            else:
+                j -= 1
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
         d = sorted(zip(nums, range(len(nums))))
         
         l, r = 0, len(nums) - 1
