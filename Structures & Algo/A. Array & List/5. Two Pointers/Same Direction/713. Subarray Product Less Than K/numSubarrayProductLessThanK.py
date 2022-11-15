@@ -17,9 +17,8 @@ class Solution:
                 l += 1
             # 出来后true
             
-            
-            if m < k:
-                ans += (r - l + 1)
+            # 现在已经m < k了
+            ans += (r - l + 1)
         
         return ans
 

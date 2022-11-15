@@ -18,4 +18,16 @@ class Solution:
             pos[c] = r
         
         return ans
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        pos = {}
+        ans = 0
+        l = -1
+        for r, c in enumerate(s):
+            if c in pos:
+                l = max(l, pos[c])
+            ans = max(ans, r - l)
+            pos[c] = r
         
+        return ans

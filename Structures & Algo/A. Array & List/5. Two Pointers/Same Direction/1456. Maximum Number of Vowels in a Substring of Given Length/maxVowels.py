@@ -1,5 +1,47 @@
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
+        vowel = "aeiou"
+        l = 0
+        ans = 0
+        cnt = 0
+        
+        for r, c in enumerate(s):
+            if r >= k:    # 长度已过
+                if s[r - k] in vowel: # 看substring 
+                    cnt -= 1          # 之前窗口的vowel移出
+            
+            if c in vowel:
+                cnt += 1
+                
+            if r >= k - 1:
+                ans = max(cnt, ans)
+        
+        return ans
+                
+
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+        vowel = "aeiou"
+        l = 0
+        ans = 0
+        temp = 0
+        
+        for r, c in enumerate(s):
+            if c in vowel:
+                temp += 1
+                
+            if r - l + 1 == k:
+                ans = max(temp, ans)
+                if s[l] in vowel:
+                    temp -= 1
+                l += 1
+        
+        return ans
+            
+
+
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
         # 固定长度 k
         ans = temp = 0
         l = 0
