@@ -1,17 +1,22 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        l = 0
-        r = len(nums) - 1
+        n = len(nums)
+        l, r = 0, n - 1
+        ans = n
+        
         while l <= r:
-            m = floor(l + (r - l) / 2)
+            m = (l + r) // 2
             if nums[m] < target:
                 l = m + 1
-            elif nums[m] > target:
+            else:
+                ans = m
                 r = m - 1
-            elif nums[m] == target:
-                return m
         
-        return -1
+        if ans == n:
+            return -1
+        if nums[ans] != target:
+            return -1
+        return ans
 
 
 # not binary search
