@@ -1,3 +1,67 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return [-1, -1]
+        
+        n = len(nums)
+        leftBound, rightBound = -1, -1
+        
+        l, r = 0, n - 1
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m] < target:
+                l = m + 1
+            else:
+                r = m - 1
+        
+        if l == n or nums[l] != target:
+            return [-1, -1]
+        leftBound = l
+        
+        l, r = 0, n - 1
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m] <= target:
+                l = m + 1
+            else:
+                r = m - 1
+        rightBound = r
+        
+        return [leftBound, rightBound]
+        
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return [-1, -1]
+        
+        leftBound, rightBound = -1, -1
+        
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m] < target:
+                l = m + 1
+            else:
+                leftBound = m
+                r = m - 1
+        
+        if nums[leftBound] != target:
+            return [-1, -1]
+        
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m] <= target:
+                rightBound = m
+                l = m + 1
+            else:
+                r = m - 1
+                
+        
+        return [leftBound, rightBound]
+        
+
 # simplified version
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:

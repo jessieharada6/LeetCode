@@ -1,9 +1,24 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         n = len(nums)
-        l, r = 0, n - 1
-        ans = n
+        l, r = 0, len(nums) - 1
+
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m] < target:
+                l = m + 1
+            else:
+                r = m - 1
         
+        if l == n or nums[l] > target:
+            return -1
+        return l
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        ans = -1
+        l, r = 0, len(nums) - 1
+
         while l <= r:
             m = (l + r) // 2
             if nums[m] < target:
@@ -12,9 +27,7 @@ class Solution:
                 ans = m
                 r = m - 1
         
-        if ans == n:
-            return -1
-        if nums[ans] != target:
+        if nums[ans] > target:
             return -1
         return ans
 
