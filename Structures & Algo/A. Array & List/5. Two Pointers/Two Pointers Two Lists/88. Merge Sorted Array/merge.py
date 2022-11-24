@@ -25,6 +25,23 @@ class Solution:
 # 方法1:
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        
+        arr = []
+        j = 0
+        for i in range(m):
+            while j < n and nums2[j] < nums1[i]:
+                arr.append(nums2[j])
+                j += 1
+            arr.append(nums1[i])
+
+        arr += nums2[j:n]
+        nums1[:] = arr
+        
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         # 以nums1为主体
         # nums2与主体比较 
 
@@ -59,7 +76,7 @@ class Solution:
                 arr.append(nums2[j])
                 j += 1
         
-        arr += nums1[i:m]
-        arr += nums2[j:]
+        arr += nums1[i:m]    # 限制范围 不让空0进入
+        arr += nums2[j:]     # 不用限制
         
         nums1[:] = arr

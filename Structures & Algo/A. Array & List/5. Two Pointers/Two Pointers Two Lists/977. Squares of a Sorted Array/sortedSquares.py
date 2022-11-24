@@ -1,5 +1,36 @@
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
+        i, j = 0, 0
+        for x in nums:
+            if x >= 0:
+                break
+            j += 1
+        
+        i = j - 1
+        n = len(nums)
+
+        arr = []
+        while i >= 0 and j < n:
+            a = nums[i] * nums[i]
+            b = nums[j] * nums[j]
+            if a < b:
+                arr.append(a)
+                i -= 1
+            else:
+                arr.append(b)
+                j += 1
+        
+        while i >= 0:
+            arr.append(nums[i] * nums[i])
+            i -= 1
+        while j < n:
+            arr.append(nums[j] * nums[j])
+            j += 1
+            
+        return arr
+            
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
         # 找到非负数
         i = 0
         for i, n in enumerate(nums):

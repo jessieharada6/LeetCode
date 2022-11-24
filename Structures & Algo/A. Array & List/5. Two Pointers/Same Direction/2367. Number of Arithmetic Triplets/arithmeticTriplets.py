@@ -1,5 +1,6 @@
 class Solution:
     def arithmeticTriplets(self, nums: List[int], diff: int) -> int:
+        # nums[k] - nums[j] == diff
         # nums[j] - nums[i] = diff
         # nums[k] - nums[i] = 2 * diff
         

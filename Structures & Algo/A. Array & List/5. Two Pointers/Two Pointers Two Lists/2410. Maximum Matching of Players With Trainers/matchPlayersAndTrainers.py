@@ -1,4 +1,20 @@
 class Solution:
+    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
+        # 方法一
+        # 以trainers为主 因为1对1 最长就是min(len(players), len(trainers))本身的长度
+        # 排序 原因：用最小的trainer值与当前player匹配 这样才可以有max length
+        
+        players.sort()
+        trainers.sort()
+        
+        j = 0
+        for i, t in enumerate(trainers):
+            if j < len(players) and players[j] <= t:
+                j += 1
+            
+        return j 
+
+class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
         # 用l,r控制范围
         # r 向右走 当s-nums[l]>=target时 
@@ -18,21 +34,6 @@ class Solution:
         
         return ans if ans != inf else 0
 
-class Solution:
-    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
-        # 方法一
-        # 以trainers为主 因为1对1 最长就是min(len(players), len(trainers))本身的长度
-        # 排序 原因：用最小的trainer值与当前player匹配 这样才可以有max length
-        
-        players.sort()
-        trainers.sort()
-        
-        j = 0
-        for i, t in enumerate(trainers):
-            if j < len(players) and players[j] <= t:
-                j += 1
-            
-        return j 
 
 class Solution:
     def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
