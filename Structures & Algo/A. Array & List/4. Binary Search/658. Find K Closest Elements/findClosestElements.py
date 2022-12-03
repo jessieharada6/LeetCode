@@ -1,6 +1,20 @@
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
         n = len(arr)
+        l, r = 0, n - k - 1
+        
+        while l <= r:
+            m = (l + r) // 2
+            if x - arr[m] <= arr[m + k] - x:
+                r = m - 1
+            else:
+                l = m + 1
+        
+        return arr[l : l + k]
+
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        n = len(arr)
         l, r = 0, n - k
         
         while l <= r:
