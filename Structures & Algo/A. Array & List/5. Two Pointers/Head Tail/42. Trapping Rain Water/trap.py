@@ -21,7 +21,7 @@ class Solution:
 class Solution:
     def trap(self, height: List[int]) -> int:
         # 不需要完全知道左右边的高度 
-        # 只需要知道更短边即可 
+        # 只需要知道更短边即可 - 取决于短板
         
         l, r = 0, len(height) - 1
         # 事先算出左右边的高度 
