@@ -1,5 +1,34 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
+        minPos = 0
+        n = len(nums)
+        l, r = 0, n - 2
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m] <= nums[-1]:
+                r = m - 1
+            else:
+                l = m + 1
+        
+        minPos = l
+        
+        l, r = 1, n - 1
+        if target <= nums[-1]:
+            l = minPos + 1
+        else:
+            r = minPos - 1
+        
+        while l <= r:
+            m = (l + r) // 2
+            if nums[m] <= target:
+                l = m + 1
+            else:
+                r = m - 1
+        if nums[r] != target: return -1
+        return r
+            
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
         # find min
         n = len(nums)
         l, r = 0, n - 2
