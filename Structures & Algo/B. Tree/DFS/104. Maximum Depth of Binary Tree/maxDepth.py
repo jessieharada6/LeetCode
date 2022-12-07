@@ -7,6 +7,14 @@ class TreeNode:
 
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if root is None: return 0
+        # 有别于最小深度 当 当前节点没有左孩子 当前节点会是1
+        l = self.maxDepth(root.left)
+        r = self.maxDepth(root.right)
+        return max(l, r) + 1
+        
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
         def dfs(node):
             if not node: return 0
             l = dfs(node.left)
@@ -15,16 +23,6 @@ class Solution:
         
         return dfs(root)
 
-      
-class Solution:
-    def maxDepth(self, root: Optional[TreeNode]) -> int:
-        if root is None:
-            return 0
-        
-        l = self.maxDepth(root.left)
-        r = self.maxDepth(root.right)
-        
-        return max(l, r) + 1
         
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:

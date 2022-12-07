@@ -4,6 +4,17 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        def dfs(left, right):
+            if left is None or right is None:
+                return left is right
+            
+            return left.val == right.val and dfs(left.left, right.right) and dfs(left.right, right.left)
+        
+        return dfs(root.left, root.right)
+        
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         def dfs(node, left, right) -> bool:
@@ -14,7 +25,7 @@ class Solution:
             return dfs(node, left.left, right.right) and dfs(node, left.right, right.left)
         
         return dfs(root, root.left, root.right)
-        
+
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         def traverse(root, flag):

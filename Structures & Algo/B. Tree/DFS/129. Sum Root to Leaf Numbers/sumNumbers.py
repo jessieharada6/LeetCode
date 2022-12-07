@@ -4,6 +4,24 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        ans = 0
+        def dfs(node, s):
+            if not node: return 0
+            s = s * 10 + node.val
+            if not node.left and not node.right:
+                nonlocal ans
+                ans += s
+                return
+            
+            dfs(node.left, s)
+            dfs(node.right, s)
+                
+        
+        dfs(root, 0)
+        return ans
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         ans = 0
