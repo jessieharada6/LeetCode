@@ -4,6 +4,26 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        ans = []
+        def dfs(node, targetSum, path):
+            if node is None: return
+            targetSum -= node.val
+            path = path + [node.val]   # make a copy at each node
+
+            if node.left is node.right and targetSum == 0:
+                ans.append(path)
+                return
+
+            dfs(node.left, targetSum, path)
+            dfs(node.right, targetSum, path)
+            
+        
+        dfs(root, targetSum, [])
+        return ans
+
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         ans = []
@@ -14,7 +34,7 @@ class Solution:
             path.append(node.val)
 
             if node.left is node.right and targetSum == 0:
-                ans.append([x for x in path])
+                ans.append([x for x in path]) # path.copy(), path[:]
                 path.pop()
                 return
             
