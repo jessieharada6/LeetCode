@@ -7,6 +7,21 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def dfs(node):
+            if node is None: 
+                return -math.inf, math.inf
+
+            l_max, l_min = dfs(node.left)
+            r_max, r_min = dfs(node.right)
+            print(node.val, l_max, l_min, r_max, r_min)
+            if l_max >= node.val or r_min <= node.val:
+                return math.inf, -math.inf
+            return max(r_max, node.val), min(l_min, node.val)
+        
+        return dfs(root)[1] != -math.inf
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
         if root.left is root.right: return True
 
         def dfs(node, lower, upper):
