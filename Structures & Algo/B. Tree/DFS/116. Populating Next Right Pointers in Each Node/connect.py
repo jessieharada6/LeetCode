@@ -7,6 +7,20 @@ class Node:
         self.right = right
         self.next = next
 """
+# 将孩子节点两两相连
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if root is None: return root
+        def dfs(node1, node2):
+            if node1 is None or node2 is None: return None
+
+            node1.next = node2
+            dfs(node1.left, node1.right) 
+            dfs(node1.right, node2.left) 
+            dfs(node2.left, node2.right)
+
+        dfs(root.left, root.right)
+        return root
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
