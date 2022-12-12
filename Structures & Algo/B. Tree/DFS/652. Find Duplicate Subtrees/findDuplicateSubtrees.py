@@ -4,6 +4,26 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
+        paths = []
+        seen = collections.defaultdict(int)
+        def dfs(node, path):
+            if node is None: return "o"
+
+            l = dfs(node.left, path)
+            r = dfs(node.right, path)
+            path = str(node.val) + "." + l + "." + r + "."
+            seen[path] += 1
+            if seen[path] == 2:
+                paths.append(node)
+
+            return path
+        dfs(root, "")
+        return paths
+
+        
 class Solution:
     def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
         count = defaultdict(int)

@@ -4,6 +4,27 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        if root is None: return 
+
+        self.flatten(root.left)
+        self.flatten(root.right)
+
+        l = root.left
+        r = root.right
+        p = l
+        while p and p.right: 
+            p = p.right
+        if p:
+            p.right = r
+            root.right = root.left
+            root.left = None
+            
 class Solution:
     def flatten(self, root: Optional[TreeNode]) -> None:
         """

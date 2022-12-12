@@ -5,7 +5,36 @@
 #         self.left = None
 #         self.right = None
 
+class Codec:
+    def serialize(self, root):
+        tree = ""
 
+        def dfs(node, tree):
+            if node is None: return "#" 
+            
+            l = dfs(node.left, tree)
+            r = dfs(node.right, tree)
+            tree = str(node.val) + "," + l + "," + r
+            return tree
+
+        return dfs(root, tree)
+        
+    def deserialize(self, data):
+        data = data.split(",")
+        print(data)
+
+        def dfs(data):
+            val = data.pop(0)
+            if val == "#": return None 
+
+            root = TreeNode(val)
+            root.left = dfs(data)
+            root.right = dfs(data)
+            return root
+        
+        return dfs(data)
+
+        
 ### Serialize and deserialize need to follow the same order
 class Codec:
 
