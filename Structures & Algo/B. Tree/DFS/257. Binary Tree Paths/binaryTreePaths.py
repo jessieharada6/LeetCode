@@ -23,24 +23,41 @@ class Solution:
         dfs(root, "")
         return ans
 
+class Solution:
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        def dfs(node):
+            if node is None: return []
+            if node.left is node.right: return [[str(node.val)]]
+
+            l = dfs(node.left)
+            r = dfs(node.right)
+
+            res = []
+            for n in l + r:
+                res.append(n + [str(node.val)])
+
+            return res
+
+        ans = []
+        for nodes in dfs(root):
+            ans.append("->".join(map(str,nodes[::-1])))
+        
+        return ans     
+
 # Output: ["5->2->1","3->1"]
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-        ans = []
-        def dfs(node, path):
-            if not node: return
-            if node.left is node.right:
-                nonlocal ans
-                path += str(node.val)
-                p = path[::-1]
-                ans.append("->".join(p))
-                path.pop()
-                return
-            
-            path.append(str(node.val))
-            dfs(node.left, path)
-            dfs(node.right, path)
-            path.pop()
-        
-        dfs(root, [])
-        return ans
+        def dfs(node):
+            if node is None: return []
+            if node.left is node.right: return [str(node.val)]
+
+            l = dfs(node.left)
+            r = dfs(node.right)
+
+            res = []
+            for n in l + r:
+                res.append(n + "->" + str(node.val))
+
+            return res
+
+        return dfs(root)

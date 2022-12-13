@@ -40,3 +40,21 @@ class Solution:
         
         dfs(root, "")
         return ans
+
+# root=[1,2,3]
+# sum 2->1, 3->1 = 52
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        def dfs(node):
+            if node is None: return []
+            if node.left is node.right: return [node.val]
+
+            l = dfs(node.left)
+            r = dfs(node.right)
+            
+            s = []
+            for n in l + r:
+                s.append(n * 10 + node.val)
+            return s
+
+        return sum(dfs(root))
