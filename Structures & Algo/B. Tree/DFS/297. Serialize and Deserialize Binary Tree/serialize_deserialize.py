@@ -7,6 +7,27 @@
 
 class Codec:
     def serialize(self, root):
+        path = ""
+        if root is None: return "#"
+        l = self.serialize(root.left)
+        r = self.serialize(root.right)
+        path = str(root.val) + "," + l + "," + r
+        return path
+
+    def deserialize(self, data):
+        data = data.split(",")
+        def dfs(data):
+            val = data.pop(0)
+            if val == "#": return None
+
+            root = TreeNode(val)
+            root.left = dfs(data)
+            root.right = dfs(data)
+            return root
+        return dfs(data)
+
+class Codec:
+    def serialize(self, root):
         tree = ""
 
         def dfs(node, tree):
@@ -34,7 +55,7 @@ class Codec:
         
         return dfs(data)
 
-        
+
 ### Serialize and deserialize need to follow the same order
 class Codec:
 
@@ -128,3 +149,27 @@ class Codec:
 # ser = Codec()
 # deser = Codec()
 # ans = deser.deserialize(ser.serialize(root))
+
+
+class Solution:
+    def maxSumBST(self, root: Optional[TreeNode]) -> int:
+        max_sum = 0
+        def traverse(root):
+            nonlocal max_sum
+            if root is None:
+                return 1, inf, -inf, 0      
+            
+            is_l, min_l, max_l, sum_l = traverse(root.left)
+            is_r, min_r, max_r, sum_r = traverse(root.right)
+            
+            if is_l and is_r and max_l < root.val < min_r:
+                cur = sum_l + sum_r + root.val
+                max_sum = max(cur, max_sum)
+                min_l = min(min_l, root.val)
+                max_r = max(max_r, root.val)
+                return 1, min_l, max_r, cur
+            else:
+                return 0, 0, 0, 0
+                
+        traverse(root)
+        return max_sum

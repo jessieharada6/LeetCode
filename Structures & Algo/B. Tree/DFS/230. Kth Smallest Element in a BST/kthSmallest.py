@@ -4,6 +4,28 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        def dfs(node):
+            nonlocal k
+            ans = -1
+            if node is None: return ans
+
+            l = dfs(node.left)
+            k -= 1
+            if k == 0:
+                ans = node.val
+            # print(k, node.val, ans)
+            r = dfs(node.right)
+
+            # print("l,r", node.val, l, r)
+            if l != -1: return l
+            if r != -1: return r
+            return ans
+            
+        return dfs(root)
+
         
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:

@@ -61,3 +61,36 @@ class Solution:
             return res
 
         return dfs(root)
+
+class Solution:
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        def dfs(node):
+            res = []
+            if node is None: return res
+            if node.left is node.right: return [str(node.val)]
+
+            l = dfs(node.left)
+            r = dfs(node.right)
+
+            
+            for n in l + r:
+                res.append(n + "->" + str(node.val))
+
+            return res
+
+        return dfs(root)
+
+# sum from bottom up
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        def dfs(node):
+            ans = 0
+            if node is None: return ans
+
+            l = dfs(node.left)
+            ans += node.val
+            r = dfs(node.right)
+
+            return ans + l + r
+            
+        return dfs(root)

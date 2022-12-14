@@ -7,6 +7,26 @@
 
 class Solution:
     def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
+        count = collections.Counter()
+        ans = []
+        def dfs(node):
+            path = ""
+            if node is None: return "o"
+
+            l = dfs(node.left)
+            r = dfs(node.right)
+            path = str(node.val) + "." + l + "." + r
+            count[path] += 1
+            if count[path] == 2:
+                # print(node.val, count)
+                ans.append(node)
+            return path 
+        
+        dfs(root)
+        return ans
+
+class Solution:
+    def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
         paths = []
         seen = collections.defaultdict(int)
         def dfs(node, path):
