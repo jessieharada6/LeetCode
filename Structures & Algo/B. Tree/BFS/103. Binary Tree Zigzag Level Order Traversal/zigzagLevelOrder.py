@@ -4,6 +4,24 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        ans = []
+        if root is None: return ans
+        cur = collections.deque([root])
+        flag = False
+
+        while cur:
+            vals = [node.val for node in cur] 
+            ans.append(vals if not flag else vals[::-1]) 
+            flag = not flag
+            for _ in range(len(cur)):
+                node = cur.popleft()
+                if node.left: cur.append(node.left)
+                if node.right: cur.append(node.right)
+                  
+        return ans
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         ans = []

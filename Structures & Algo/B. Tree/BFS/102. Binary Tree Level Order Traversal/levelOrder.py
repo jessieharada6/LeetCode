@@ -7,22 +7,31 @@
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         ans = []
-        
-        if root is None:
-            return ans
-        
-        level = [root]
-        while level:
-            cur = []
-            nextLevel = []
-            for node in level:
-                cur.append(node.val)
-                if node.left:
-                    nextLevel.append(node.left)
-                if node.right:
-                    nextLevel.append(node.right)
-            level = nextLevel
-            ans.append(cur)
-        
+        if root is None: return ans
+        cur = [root]
+
+        while cur:
+            ans.append([node.val for node in cur])
+            nxt = []
+            for node in cur:
+                if node.left: nxt.append(node.left)
+                if node.right: nxt.append(node.right)
+            cur = nxt
+
         return ans
-                     
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        ans = []
+        if root is None: return ans
+        cur = collections.deque([root])
+
+        while cur:
+            ans.append([node.val for node in cur])
+
+            for _ in range(len(cur)):
+                node = cur.popleft()
+                if node.left: cur.append(node.left)
+                if node.right: cur.append(node.right)
+
+        return ans
