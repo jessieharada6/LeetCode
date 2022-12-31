@@ -1,5 +1,45 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+
+        def dfs(i, path):
+            if i == len(nums):
+                ans.append(path)
+                return
+            
+            for x in set(nums) - set(path):
+                dfs(i + 1, path + [x])
+
+        dfs(0, [])
+        return ans
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        visit = [False] * len(nums)
+        path = []
+
+        def dfs(i):
+            if i == len(nums):
+                ans.append(path[:])
+                return None
+            
+            for j, x in enumerate(nums):
+                if not visit[j]:
+                    visit[j] = True
+                    path.append(x)
+                    dfs(i + 1)
+                    path.pop()
+                    visit[j] = False
+            
+        
+        dfs(0)
+        return ans
+
+
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
         paths = []
         # path = []
         n = len(nums)
