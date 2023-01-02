@@ -1,5 +1,23 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        def dfs(path, i):
+            if sum(path) > target: return
+
+            if sum(path) == target:
+                ans.append(path)
+                return
+
+            for j in range(i, len(candidates)):
+                # print(i, j, path)
+                dfs(path + [candidates[j]], j)
+            
+        dfs([], 0)
+        return ans
+
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         combinations = []
         
         def traverse(start, path, target):
