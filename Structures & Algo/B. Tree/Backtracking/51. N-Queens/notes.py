@@ -1,3 +1,11 @@
+# ["".join(i) for i in board]:
+
+# arr = []
+# for p in path:
+#     a = ''.join(p)
+#     arr.append(a)
+
+
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         # queens = [["." for _ in range(n)] for _ in range(n)]
