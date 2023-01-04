@@ -1,3 +1,21 @@
+# 只用两个变量
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        ans = []
+        def dfs(path, open):
+            if len(path) > n * 2: return
+            if open == n and len(path) - open == n:
+                ans.append(path)
+                return
+            
+            # 这里也是有for loop 只是展开了 (, )两个
+            dfs(path + "(", open + 1)
+            if open > len(path) - open:
+                dfs(path + ")", open)
+        
+        dfs("", 0)
+        return ans
+
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         ans = []

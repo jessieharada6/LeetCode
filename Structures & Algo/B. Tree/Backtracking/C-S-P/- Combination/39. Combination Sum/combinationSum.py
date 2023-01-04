@@ -9,7 +9,6 @@ class Solution:
                 return
 
             for j in range(i, len(candidates)):
-                # print(i, j, path)
                 dfs(path + [candidates[j]], j)
             
         dfs([], 0)
