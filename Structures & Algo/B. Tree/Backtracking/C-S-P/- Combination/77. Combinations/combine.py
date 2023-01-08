@@ -12,6 +12,22 @@ class Solution:
         
         dfs([], 1)
         return ans
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        ans = []
+        def dfs(path, i):
+            if len(path) > k or len(path) + n + 1 - i < k:
+                return 
+            if i == n + 1:
+                ans.append(path)
+                return
+            
+            dfs(path + [i], i + 1)
+            dfs(path, i + 1)
+        
+        dfs([], 1)
+        return ans
         
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
