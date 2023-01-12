@@ -20,6 +20,7 @@ class Solution:
         dfs([])
         return ans
 
+
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         ans = []
