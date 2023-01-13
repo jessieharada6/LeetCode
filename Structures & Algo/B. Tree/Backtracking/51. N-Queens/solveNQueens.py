@@ -42,6 +42,30 @@ class Solution:
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         ans = []
+        def is_attack(r, c, r1, c1):
+            return c == c1 or r + c == r1 + c1 or r - c == r1 - c1
+        
+        def is_all_attack(cols, col):
+            for r, c in enumerate(cols):
+                if is_attack(r, c, len(cols), col):
+                    return True 
+            return False
+
+        def dfs(cols):
+            if len(cols) == n:
+                ans.append("." * c + "Q" + "." * (n - c - 1)for c in cols)
+                return
+
+            for col in range(n):
+                if not is_all_attack(cols, col):
+                    dfs(cols + [col])
+        
+        dfs([])
+        return ans
+
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        ans = []
         path = [['.'] * n for _ in range(n)]
         def dfs(i):
             if i == n:
