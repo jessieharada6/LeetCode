@@ -2,7 +2,6 @@ class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
         ans = []
         def dfs(path, i):
-            print(path, i)
             if i == len(s) and len(path) == len(s) + 3:
                 ans.append(path)
                 return
@@ -19,6 +18,23 @@ class Solution:
         
         dfs("", 0)
         return ans
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        paths = []
+        def isValid(s):
+            return s and 0 <= int(s) <= 255 and s[0] != "0" or s == "0"
+
+        def dfs(path, input, cnt):
+            if cnt == 3 and isValid(input):
+                paths.append(path + input)
+            
+            for i in range(1, 4):
+                if not isValid(input[:i]): break # 如果当前sliced的input不valid 整个ip都不行 直接重新加点
+                dfs(path + input[:i] + ".", input[i:], cnt + 1) # 目前符合条件的input[:i] 拆分新的input[i:]
+            
+        dfs("", s, 0)
+        return paths
 
 
 class Solution:
