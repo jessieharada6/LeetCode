@@ -74,3 +74,44 @@ class Solution:
                     board[i][j] = "X"
                 if board[i][j] in edges:
                     board[i][j] = "O"
+
+
+# 只用一次visited，保证o的地方只访问一次 
+# 1. 用全局变量记录每个坐标
+# 2. 用全局变量标识这一次所有的o有没有到达边界
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        m, n = len(board), len(board[0])
+        #因为只访问o，每一个o只访问一次。所以不用生成新的visited.
+        visited = [[False] * n for _ in range(m)] 
+
+        def dfs(row, col):
+            # print(row, col)
+            if row < 0 or col < 0 or row >= m or col >= n:
+                return
+            
+            if board[row][col] == "X":
+                return
+
+            if visited[row][col]:
+                return
+
+            visited[row][col] = True
+            points.append([row, col])
+            if row == 0 or col == 0 or row == m - 1 or col == n - 1:
+                nonlocal touch
+                touch = True
+
+            for r, c in (row + 1, col), (row - 1, col), (row, col + 1), (row, col - 1):
+                dfs(r, c)
+        
+        for i in range(0, m):
+            for j in range(0, n):
+                touch = False
+                points = []
+                if board[i][j] == "O":
+                    dfs(i, j)
+                    # print(touch, points)
+                    if not touch:
+                        for x, y in points:
+                            board[x][y] = "X"

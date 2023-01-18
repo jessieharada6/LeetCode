@@ -18,11 +18,12 @@ class Solution:
             return visited[-1][-1]
 
         l = 0
-        r = -1
-        for i in range(n):
-            for j in range(n):
-                if grid[i][j] > r:
-                    r = grid[i][j]
+        r = max(max(row) for row in grid)
+        # r = -1
+        # for i in range(n):
+        #     for j in range(n):
+        #         if grid[i][j] > r:
+        #             r = grid[i][j]
 
         while l <= r:
             m = (l + r) // 2

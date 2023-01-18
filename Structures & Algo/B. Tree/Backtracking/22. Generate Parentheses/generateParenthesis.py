@@ -34,6 +34,27 @@ class Solution:
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
+        paths = []
+
+        def dfs(path, l, r):
+            if l > n or r > n: return
+            # print(l, r, path)
+            if l == n and r == n:
+                paths.append(path)
+            
+            # print(path, l, r)
+
+            # path += "(" # 不可这样 这样每次必经这行 会多加(
+            dfs(path + "(", l + 1, r) # 会被if l > n or r > n款住
+            if l > r:
+                # path += ")"
+                dfs(path + ")", l, r + 1)
+
+        dfs("", 0, 0)
+        return paths
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
         ans = []
         def dfs(path, i, o, c):
             if i > n * 2: return

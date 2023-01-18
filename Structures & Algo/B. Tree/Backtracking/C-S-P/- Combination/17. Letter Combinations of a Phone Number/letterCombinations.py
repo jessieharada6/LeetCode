@@ -28,6 +28,38 @@ class Solution:
         dfs("", 0)
         return ans
 
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if digits == "": return []
+
+        dict = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz"
+        }
+
+        paths = []
+        def dfs(path, i):
+            if len(path) == len(digits):
+                paths.append(path)
+                return
+            
+            for j in range(i, len(digits)):
+                for c in dict[digits[j]]:
+                    dfs(path + c , j + 1)
+            
+            # for c in dict[digits[i]]: 
+            #     dfs(path + c, i + 1)
+        
+        dfs("", 0)
+        return paths
+
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         dict = {
