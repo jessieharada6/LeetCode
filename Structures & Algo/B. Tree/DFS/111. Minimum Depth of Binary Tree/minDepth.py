@@ -14,6 +14,24 @@ class Solution:
         r = self.minDepth(root.right) if root.right else -inf
         print(root.val, l, r)
         return min(l, r) + 1
+
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        def dfs(node) -> int:
+            if not node: return 0
+            if node.left is node.right: return 1
+
+            l = dfs(node.left)
+            r = dfs(node.right)
+
+            if l == 0 and r != 0:
+                return r + 1
+            if l != 0 and r == 0:
+                return l + 1
+            return min(l, r) + 1 
+        
+        
+        return dfs(root)
 class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
         

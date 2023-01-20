@@ -7,8 +7,8 @@ class TreeNode:
 
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if p is None or q is None: 
-            return p is q
+        if p is None or q is None: # p是空或q是空时 无法再走
+            return p is q # 此时判断是否相同
 
         return p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
 
