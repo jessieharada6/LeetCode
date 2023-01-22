@@ -23,3 +23,29 @@ class Solution:
 
         dfs(root, 0)        
         return ans
+
+
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        ans = 0
+        count = collections.Counter()
+
+        def dfs(node, s, path):
+            nonlocal ans
+            if node is None: return 0
+            s += node.val
+            
+            if s == targetSum: 
+                ans += count[0] + 1
+            else: 
+                ans += count[s - targetSum]
+            
+            count[s] += 1
+            dfs(node.left, s, path)
+            dfs(node.right, s, path)
+            count[s] -= 1
+            s -= node.val
+
+
+        dfs(root, 0, [])
+        return ans

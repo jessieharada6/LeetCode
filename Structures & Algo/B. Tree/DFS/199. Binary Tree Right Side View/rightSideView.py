@@ -7,20 +7,39 @@ class TreeNode:
 
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        ans = []
+        rightSide = []
+        def dfs(node, depth):
+            if node is None: return
+
+            if len(rightSide) == depth:
+                rightSide.append(node.val)
+            
+            r = dfs(node.right, depth + 1)
+            l = dfs(node.left, depth + 1)
+            
+        
+        dfs(root, 0)
+        return rightSide
+
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        rightSide = []
+        curDepth = -1
         def dfs(node, depth):
             if node is None: return
             
-            if len(ans) == depth:
-                ans.append(node.val)
+            nonlocal curDepth
+            if curDepth < depth:
+                rightSide.append(node.val)
+                curDepth = depth
+            # print(node.val, depth, curDepth)
+            r = dfs(node.right, depth + 1)
+            l = dfs(node.left, depth + 1)
             
-            dfs(node.right, depth + 1)
-            dfs(node.left, depth + 1)
         
         dfs(root, 0)
-        return ans
+        return rightSide
 
-        
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         ans = []
@@ -39,27 +58,3 @@ class Solution:
         return ans
 
 
-class Solution:
-    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        ans = 0
-        count = collections.Counter()
-
-        def dfs(node, s, path):
-            nonlocal ans
-            if node is None: return 0
-            s += node.val
-            
-            if s == targetSum: 
-                ans += count[0] + 1
-            else: 
-                ans += count[s - targetSum]
-            
-            count[s] += 1
-            dfs(node.left, s, path)
-            dfs(node.right, s, path)
-            count[s] -= 1
-            s -= node.val
-
-
-        dfs(root, 0, [])
-        return ans
