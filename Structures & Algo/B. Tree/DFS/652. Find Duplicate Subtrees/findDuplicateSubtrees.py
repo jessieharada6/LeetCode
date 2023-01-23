@@ -5,22 +5,30 @@
 #         self.left = left
 #         self.right = right
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
         count = collections.Counter()
         ans = []
         def dfs(node):
-            path = ""
-            if node is None: return "o"
+            path = ""                   # path每一次都是空的 已经走过的path返回到了l和r
+            if node is None: return "#"
 
             l = dfs(node.left)
             r = dfs(node.right)
-            path = str(node.val) + "." + l + "." + r
+
+            # 直接加node是不行的 因为对象是独立存在的
+            path += str(node.val) + "." + l + "." + r + "."
+
             count[path] += 1
             if count[path] == 2:
-                # print(node.val, count)
                 ans.append(node)
-            return path 
+            return path
         
         dfs(root)
         return ans

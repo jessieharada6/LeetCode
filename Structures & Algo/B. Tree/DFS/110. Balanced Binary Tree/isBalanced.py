@@ -27,7 +27,7 @@ class Solution:
             l = dfs(node.left)
             r = dfs(node.right)
             if abs(l - r) > 1:
-                nonlocal ans
+                nonlocal ans  ###
                 ans = False
             return max(l, r) + 1
         dfs(root)

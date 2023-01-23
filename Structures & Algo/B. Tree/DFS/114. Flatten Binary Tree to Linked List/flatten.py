@@ -10,6 +10,25 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
+        if root is None: return
+        
+        l, r = root.left, root.right
+        p = l
+        while p and p.right:
+            p = p.right
+        if p:
+            p.right = r
+            root.right = root.left
+            root.left = None
+        
+        self.flatten(root.left)
+        self.flatten(root.right)
+        
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
         if root is None: return 
 
         self.flatten(root.left)

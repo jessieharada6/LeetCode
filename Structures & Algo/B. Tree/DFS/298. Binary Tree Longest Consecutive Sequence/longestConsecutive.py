@@ -1,6 +1,23 @@
 class Solution:
     def longestConsecutive(self, root: Optional[TreeNode]) -> int:
         ans = 0
+        def dfs(node, cnt):
+            if node is None: return 0
+            
+            # print(node.val, cnt)
+            dfs(node.left, cnt + 1 if node.left and node.val + 1 == node.left.val else 1)
+            dfs(node.right, cnt + 1 if node.right and node.val + 1 == node.right.val else 1)
+            # print(node.val, cnt)
+            nonlocal ans
+            ans = max(ans, cnt)
+            return cnt
+        
+        dfs(root, 1)
+        return ans
+
+class Solution:
+    def longestConsecutive(self, root: Optional[TreeNode]) -> int:
+        ans = 0
         def dfs(node): # -> current longest 
             if node is None: return 0
             

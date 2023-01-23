@@ -7,6 +7,25 @@ class TreeNode:
 
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        def dfs(node):
+            if node is None: return -1
+
+            l = dfs(node.left)
+            nonlocal k
+            if k == 0:
+                return l
+            
+            k -= 1
+            if k == 0:
+                return node.val
+            
+            r = dfs(node.right)
+            return r
+        
+        return dfs(root)
+
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         def dfs(node): # -> when k = 0, return node.val
             nonlocal k
             if node is None: return -1

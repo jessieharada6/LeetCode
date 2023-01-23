@@ -4,6 +4,22 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        ans = 0
+        def dfs(node, isLeft):
+            if node is None: return
+
+            if node.left is node.right and isLeft: 
+                nonlocal ans
+                ans += node.val
+            dfs(node.left, True)
+            dfs(node.right, False)
+        
+        dfs(root, False)
+        return ans
+
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
         ans = 0
