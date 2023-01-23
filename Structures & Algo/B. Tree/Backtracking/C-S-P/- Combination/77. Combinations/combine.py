@@ -1,6 +1,23 @@
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         ans = []
+        def dfs(i, path, n, k):
+            if len(path) == k:
+                ans.append(path[:])
+
+            for j in range(i, n + 1):
+                path.append(j)
+                # print("i", i, "j", j, "path", path)
+                dfs(j + 1, path, n, k) #只考虑了接下来的第一步
+                path.pop()
+
+        
+        dfs(1, [], n, k)
+        return ans
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        ans = []
         def dfs(path, i):
             if i == n + 1:
                 if len(path) == k:
