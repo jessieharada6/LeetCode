@@ -6,22 +6,23 @@ class TreeNode:
         self.right = right
 class Solution:
     def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
+        cur_depth = 0
         ans = 0
-        cur = 0
+
         def dfs(node, depth):
-            if not node: return 0
+            if node is None: return
 
-            dfs(node.left, depth + 1)
-            dfs(node.right, depth + 1)
-
-            nonlocal cur
+            nonlocal cur_depth
             nonlocal ans
-
-            if depth > cur:
-                cur = depth
-                ans = 0
-            if depth == cur:
+            
+            if cur_depth < depth:
+                cur_depth = depth
+                ans = 0            # reset if cur_depth < depth
+            if cur_depth == depth:
                 ans += node.val
         
-        dfs(root, 0)
+            dfs(node.left, depth + 1)
+            dfs(node.right, depth + 1)
+        
+        dfs(root, 1)
         return ans

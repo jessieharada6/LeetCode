@@ -7,6 +7,27 @@
 
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None: return []
+        cur = [root]
+        zig = False
+        ans = []
+        path = []
+
+        while cur:
+            # print(cur)
+            path = [node.val for node in cur]
+            ans.append(path if not zig else path[::-1])
+            nxt = []
+            for node in cur:
+                if node.left: nxt.append(node.left)
+                if node.right: nxt.append(node.right)
+            cur = nxt
+            zig = not zig
+        
+        return ans
+        
+class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         ans = []
         if root is None: return ans
         cur = collections.deque([root])
