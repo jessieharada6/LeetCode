@@ -1,6 +1,20 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         ans = []
+        def dfs(start_index, path, target):
+            if target < 0: return
+            if target == 0:
+                ans.append(path)
+            
+            for j in range(start_index, len(candidates)):
+                dfs(j, path + [candidates[j]], target - candidates[j]) # 这个放stat_index会一直重复用candidates[0]不能往右移动
+        
+        dfs(0, [], target)
+        return ans
+        
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
         def dfs(path, i):
             if sum(path) > target: return
 
