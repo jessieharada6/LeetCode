@@ -1,6 +1,33 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         ans = []
+
+        def is_connected(cur_col, cur_row, col, row):
+            return cur_col + cur_row == col + row \
+             or cur_col - cur_row == col - row \
+             or cur_col == col
+
+        def dfs(queens):
+            if len(queens) == n:
+                print(queens)
+                ans.append([q * "." + "Q" + (n - q - 1) * "." for q in queens])
+                return
+            
+            for cur_col in range(n):
+                for row, col in enumerate(queens):
+                    if is_connected(cur_col, len(queens), col, row):
+                        break
+                else:
+                    queens.append(cur_col)
+                    dfs(queens)
+                    queens.pop()
+        
+        dfs([])
+        return ans
+
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        ans = []
         def is_attack(r, c, r1, c1):
             return c1 == c or c1 + r1 == c + r or c1 - r1 == c - r
         
