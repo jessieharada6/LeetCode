@@ -1,5 +1,55 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        visited = [False] * n
+        paths = []
+ 
+        # 不写start 且不在dfs(start + 1, visited, path + [nums[i]])或dfs(i + 1, visited, path + [nums[i]])
+        # 完全ok的
+        # 因为递归自己知道去下一层， 用start或者i是为了我们自己知道
+
+        # for i in range(n) 这里不需要(start, n) 因为我们需要总是从全排列 而非避免重复的子集
+
+        # visited 的作用是保证本条路径的元素不重叠 123而非112之类的
+        def dfs(visited, path):
+            if len(path) == n:
+                paths.append(path)
+                return
+            
+            for i in range(n):
+                if visited[i]: continue
+                visited[i] = True
+                dfs(visited, path + [nums[i]])
+                visited[i] = False
+        
+        dfs(visited, [])
+        return paths
+
+
+######
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        vis = [False] * len(nums)
+        def dfs(path, i, vis):
+            if i == len(nums):
+                ans.append(path)
+                return
+            
+            for j, x in enumerate(nums):
+                if not vis[j]:
+                    vis[j] = True
+                    # i+1不会递归往下，递归本身会往下，
+                    # 我们保存i是因为要知道层数找到什么时候返回
+                    dfs(path + [nums[j]], i + 1, vis) 
+                    vis[j] = False
+            
+        dfs([], 0, vis)
+        return ans
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
         ans = []
 
         def dfs(i, path):
