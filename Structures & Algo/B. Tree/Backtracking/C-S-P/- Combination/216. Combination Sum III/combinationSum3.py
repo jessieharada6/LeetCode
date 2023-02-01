@@ -1,3 +1,24 @@
+# 1. 回溯
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        paths = []
+
+        def dfs(start, path):
+            # print(start ,path)
+            if sum(path) > n:
+                return
+            
+            if sum(path) == n:
+                if len(path) == k:
+                    paths.append(path)
+                return
+            
+            for i in range(start, 10):
+                dfs(i + 1, path + [i])
+        
+        dfs(1, [])
+        return paths
+
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         ans = []
@@ -51,4 +72,29 @@ class Solution:
                 path.pop()
             
         traverse(1, [])
+        return paths
+
+
+# 2. 选与不选
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        paths = []
+
+        def dfs(start, path):
+            # print(start ,path)
+            if start > 10:
+                return
+            
+            if sum(path) > n:
+                return
+            
+            if sum(path) == n:
+                if len(path) == k:
+                    paths.append(path)
+                return
+            
+            dfs(start + 1, path + [start])
+            dfs(start + 1, path)
+        
+        dfs(1, [])
         return paths

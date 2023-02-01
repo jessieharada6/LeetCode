@@ -15,20 +15,37 @@ class Solution:
         dfs(1, [], n, k)
         return ans
 
+### 1 回溯
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
-        ans = []
+        paths = []
+        def dfs(path, start):
+            if start > n + 1: return
+            if len(path) == k: #与子集(###2)路径不同,这里截止了层数,没有这个if,求的就是子集
+                paths.append(path)
+                return             
+            
+            for i in range(start, n + 1):
+                dfs(path + [i], i + 1)
+        
+        dfs([], 1)
+        return paths
+
+### 2 选与不选
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        paths = []
         def dfs(path, i):
-            if i == n + 1:
-                if len(path) == k:
-                    ans.append(path)
-                return
+            if i == n + 1: # 这里同时防止溢出 所以len(path) == k要放下面一层
+                if len(path) == k: ##
+                    paths.append(path)
+                return             ##
             
             dfs(path + [i], i + 1)
             dfs(path, i + 1)
         
         dfs([], 1)
-        return ans
+        return paths
 
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
