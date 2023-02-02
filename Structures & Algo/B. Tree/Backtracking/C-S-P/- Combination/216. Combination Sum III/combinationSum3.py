@@ -1,4 +1,4 @@
-# 1. 回溯
+# 1. 枚举当前选哪个
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         paths = []

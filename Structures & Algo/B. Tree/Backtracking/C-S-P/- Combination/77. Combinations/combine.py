@@ -15,7 +15,7 @@ class Solution:
         dfs(1, [], n, k)
         return ans
 
-### 1 回溯
+### 1. 枚举当前选哪个
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         paths = []
@@ -31,7 +31,7 @@ class Solution:
         dfs([], 1)
         return paths
 
-### 2 选与不选
+### 2. 选与不选
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         paths = []

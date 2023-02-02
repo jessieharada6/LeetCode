@@ -68,4 +68,41 @@ class Solution:
         
         traverse(0, [])
         return paths
-        
+
+### 1. 枚举当前选哪个
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        paths = []
+        n = len(candidates)
+        def dfs(start, path):
+            if sum(path) > target:
+                return
+            if sum(path) == target:
+                paths.append(path)
+                return
+
+            for i in range(start, n):
+                dfs(i, path + [candidates[i]])
+            
+        dfs(0, [])
+        return paths
+
+# 2. 选与不选
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        paths = []
+        n = len(candidates)
+        def dfs(start, path):
+            if start == n:
+                return
+            if sum(path) > target:
+                return
+            if sum(path) == target:
+                paths.append(path)
+                return
+
+            dfs(start, path + [candidates[start]]) # 选 start留在当前
+            dfs(start + 1, path) # 不选 start去下一个
+            
+        dfs(0, [])
+        return paths
