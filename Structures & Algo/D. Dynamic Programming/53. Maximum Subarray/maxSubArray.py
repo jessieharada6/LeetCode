@@ -78,3 +78,26 @@ class Solution:
             ans = max(ans, b)
             
         return ans
+
+# 7.
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans, b = nums[0], nums[0]
+
+        for i in range(1, n):
+            b = max(nums[i] + b, nums[i])
+            ans = max(ans, b)
+            
+        return ans
+
+# 8.
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        ans, b = -math.inf, -math.inf
+
+        for x in nums:
+            b = max(x + b, x)
+            ans = max(ans, b)
+            
+        return ans
