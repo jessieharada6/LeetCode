@@ -80,7 +80,7 @@ class Solution:
         n = len(coins)
 
         f = [[inf] * (amount + 1) for _ in range(n + 1)]
-        for start in range(n + 1): f[start][0] = 0
+        for start in range(n + 1): f[start][0] = 0 # if left == 0: return 0 
         for start in range(1, n + 1):
             for left in range(1, amount + 1):
                 if left - coins[start - 1] >= 0:
