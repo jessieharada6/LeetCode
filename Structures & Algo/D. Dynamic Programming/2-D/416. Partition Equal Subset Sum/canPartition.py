@@ -47,7 +47,7 @@ class Solution:
 
         # cache[start][left] 
         # start: [0, n-1]     到达n-1结束 n时已做出判断（if start == n）
-        # left: [0, target] 从target开始向下走
+        # left: [0, target]   从target开始向下走
         cache = [[-1] * (target + 1) for _ in range(n)]
         def dfs(start, left) -> bool: 
             if start == n: return left == 0
@@ -61,7 +61,8 @@ class Solution:
 
         return dfs(0, target)
 
-# 4. imitate dp
+### imitate dp
+# 4. 
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         n = len(nums)
@@ -103,7 +104,109 @@ class Solution:
                     f[start][left] = f[start - 1][left] # 如果<0 就不选这个数
         return f[n][target]
 
+### a more obvious way to imitate dp
+# 7.
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        total = sum(nums)
+        if total % 2: return False
+        target = total // 2
 
+        # cache[start][left] 
+        # start: [0, n]     从n开始往下走
+        # left: [0, target] 从target开始向下走
+        cache = [[-1] * (target + 1) for _ in range(n + 1)]
+        def dfs(start, left) -> bool: 
+            if start == 0: return left == 0
+            # if left < 0: return False
+
+            if cache[start][left] != -1: return cache[start][left]
+
+            res = -1
+            if left - nums[start - 1] < 0:
+                res = dfs(start - 1, left)
+            else:
+                res = dfs(start - 1, left - nums[start - 1]) or dfs(start - 1, left)
+            cache[start][left] = res
+            return res
+
+        return dfs(n, target)
+# 6. 由7转化
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        total = sum(nums)
+        if total % 2: return False
+        target = total // 2
+
+        f = [[False] * (target + 1) for _ in range(n + 1)]
+        f[0][0] = True                   # 由if start == 0: return left == 0转化
+        for start in range(1, n + 1):
+            for left in range(1, target + 1):
+                if left - nums[start - 1] >= 0:
+                    f[start][left] = f[start - 1][left - nums[start - 1]] or f[start - 1][left] 
+                else:
+                    # if left < 0: return False 
+                    # on dfs(start - 1, left - nums[start - 1])
+                    # 表示选了当前数left - nums[start - 1]) - 1操作为false
+                    # 但不表示不选当前数的操作为false
+                    # f[start][left] = False or f[start - 1][left] 
+                    f[start][left] = f[start - 1][left] 
+        return f[n][target]
+
+###空间优化
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        total = sum(nums)
+        if total % 2: return False
+        target = total // 2
+
+        f = [[False] * (target + 1) for _ in range(2)]
+        f[0][0] = True
+        for start in range(1, n + 1):
+            for left in range(1, target + 1):
+                if left - nums[start - 1] >= 0:
+                    f[start%2][left] = f[(start - 1)%2][left - nums[(start - 1)]] or f[(start - 1)%2][left]
+                else:
+                    f[start%2][left] = f[(start - 1)%2][left]
+        return f[n%2][target]
+
+# for start in range(1, n + 1):
+#     for left in range(target, 0, -1): #[1, target]
+
+    # if left - nums[start - 1] >= 0: -> left >= nums[start - 1]
+    # for left in range(target, 0, -1): -> for left in range(target, nums[start - 1] - 1, -1): -> [nums[start - 1], target]
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        total = sum(nums)
+        if total % 2: return False
+        target = total // 2
+
+        f = [False] * (target + 1)
+        f[0] = True
+        for start in range(1, n + 1):
+            for left in range(target, 0, -1):
+                if left - nums[start - 1] >= 0:
+                    f[left] = f[left - nums[(start - 1)]] or f[left]
+        return f[target]
+
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        total = sum(nums)
+        if total % 2: return False
+        target = total // 2
+
+        f = [False] * (target + 1)
+        f[0] = True
+        for start in range(1, n + 1):
+            x = nums[start - 1]
+            for left in range(target, x - 1, -1):
+                f[left] = f[left - x] or f[left]
+        return f[target]
 ##########################################################################################
 # 2. 
 class Solution:
