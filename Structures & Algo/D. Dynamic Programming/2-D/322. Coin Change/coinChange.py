@@ -53,7 +53,7 @@ class Solution:
         ans = dfs(n, amount) #也可以穿入n-1 但用cache不好操作
         return -1 if ans == inf else ans 
 
-# 4.
+# 4. 记忆化搜索
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         n = len(coins)
@@ -74,7 +74,7 @@ class Solution:
         ans = dfs(n, amount) 
         return -1 if ans == inf else ans 
 
-# 5.
+# 5. 递推
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         n = len(coins)
@@ -89,12 +89,41 @@ class Solution:
                     f[start][left] = f[start - 1][left] # 如果<0 就不选这枚硬币
         
         return f[start][amount] if f[start][amount] != inf else -1
+        # start已走到了n
+        # return f[n][amount] if f[n][amount] != inf else -1
+
+ # 6. 两个数组
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        n = len(coins)
+
+        f = [[inf] * (amount + 1) for _ in range(2)]
+        for start in range(2): f[start][0] = 0    # if left == 0: return 0 
+        for start in range(1, n + 1):
+            for left in range(1, amount + 1):
+                if left - coins[start - 1] >= 0:
+                    f[start % 2][left] = min(f[start % 2][left - coins[start - 1]] + 1, f[(start - 1) % 2][left])
+                else:
+                    f[start % 2][left] = f[(start - 1) % 2][left] # 如果<0 就不选这枚硬币
+        
+        return f[n % 2][amount] if f[n % 2][amount] != inf else -1
 
 
+# 7. 一维dp
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        n = len(coins)
 
+        f = [inf] * (amount + 1)
+        f[0] = 0    
 
-
-
+        for start in range(1, n + 1):
+            x = coins[start - 1]
+            for left in range(x, amount + 1):
+                # if left >= coins[start - 1]:
+                f[left] = min(f[left - x] + 1, f[left])
+        
+        return f[amount] if f[amount] != inf else -1
 
 
 

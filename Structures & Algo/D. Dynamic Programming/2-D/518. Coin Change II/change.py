@@ -49,7 +49,7 @@ class Solution:
         
         return dfs(n, amount)
 
-# 4.
+# 4. 记忆化搜索
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
         n = len(coins)
@@ -71,7 +71,7 @@ class Solution:
         
         return dfs(n, amount)
 
-# 5. 
+# 5. 递推
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
         n = len(coins)
@@ -85,4 +85,33 @@ class Solution:
                 else:
                     f[start][left] = f[start - 1][left] #当前这枚硬币面值太大，不选
         return f[start][amount]
+ 
+ # 6. 两个数组
+ class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        n = len(coins)
+        
+        f = [[0] * (amount + 1) for _ in range(2)]
+        for start in range(2): f[start][0] = 1   # if left == 0: return 1
+        for start in range(1, n + 1):
+            for left in range(1, amount + 1):
+                if left - coins[start - 1] >= 0:
+                    f[start % 2][left] = f[start % 2][left - coins[start - 1]] + f[(start - 1) % 2][left]
+                else:
+                    f[start % 2][left] = f[(start - 1) % 2][left] 
+        return f[n % 2][amount]
+ 
+ # 7. 一维dp
+ class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        n = len(coins)
+        
+        f = [0] * (amount + 1)
+        f[0] = 1 
+        for start in range(1, n + 1):
+            x = coins[start - 1]
+            for left in range(x, amount + 1):
+                f[left] += f[left - x] 
+
+        return f[amount]
  
