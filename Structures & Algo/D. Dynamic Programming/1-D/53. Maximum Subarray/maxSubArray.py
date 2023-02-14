@@ -1,4 +1,53 @@
-# 以i为结尾的最大子数组和
+# 以i为结尾的非空最大子数组和
+#
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+    
+        @cache
+        def dfs(i) -> int:
+            if i < 0: return 0
+            # if i == 0: return nums[0]
+            # nums[i] 必选 以满足以i为结尾的最大子数组和 不选会断-就不是子数组了
+            return max(nums[i] + dfs(i - 1), nums[i])
+        
+        ans = -inf
+        for i in range(n):
+            res = dfs(i)
+            ans = max(res, ans)
+        return ans
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        @cache
+        def dfs(i) -> int:
+            if i < 0: return 0
+            return max(nums[i] + dfs(i - 1), nums[i])
+
+        return max(dfs(i) for i in range(n))
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        f = [0] * n
+        f[0] = nums[0]
+        for i in range(1, n):
+            f[i] = max(nums[i] + f[i - 1], nums[i])
+        return max(f)
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans, b = -inf, -inf
+        for x in nums:
+            b = max(x + b, x)
+            ans = max(ans, b)
+
+        return ans
+
+###
 # 1. 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
@@ -100,4 +149,36 @@ class Solution:
             b = max(x + b, x)
             ans = max(ans, b)
             
+        return ans
+
+###
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+    
+        # @cache
+        # def dfs(i) -> int:
+        #     if i < 0: return 0
+        #     # if i == 0: return nums[0]
+
+        #     return max(nums[i] + dfs(i - 1), nums[i])
+        
+        # # ans = -inf
+        # # for i in range(n):
+        # #     res = dfs(i)
+        # #     ans = max(res, ans)
+        # return max(dfs(i) for i in range(n))
+
+        # f = [0] * n
+        # f[0] = nums[0]
+        # for i in range(1, n):
+        #     f[i] = max(nums[i] + f[i - 1], nums[i])
+        # return max(f)
+
+        a, b = 0, nums[0]
+        ans = nums[0]
+        for i in range(1, n):
+            a, b = b, max(nums[i] + b, nums[i])
+            ans = max(ans, b)
+            print(a, b)
         return ans

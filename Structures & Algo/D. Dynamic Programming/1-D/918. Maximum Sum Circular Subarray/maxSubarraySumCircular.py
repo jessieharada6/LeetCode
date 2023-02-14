@@ -14,7 +14,8 @@ class Solution:
             b = min(nums[i] + b, nums[i])
             least = min(least, b)
         
-        # 非空最小子数组和有可能会是全部-当所有数为负数 - sum(nums) != least
+        # 非空最小子数组和有可能会是全部
+        # 当所有数为负数： sum(nums) != least 这样得出的子集是空子集不符合题意
         return max(sum(nums) - least if sum(nums) != least else -math.inf, most)
 
 class Solution:

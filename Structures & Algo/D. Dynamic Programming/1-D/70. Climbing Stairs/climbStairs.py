@@ -1,3 +1,31 @@
+#
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        @cache
+        def dfs(steps) -> int:
+            if steps == 0: return 1
+            if steps < 0: return 0
+
+            return dfs(steps - 1) + dfs(steps - 2)
+        return dfs(n)
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        f = [0] * (n + 2)
+        f[1] = 1
+
+        for steps in range(2, n + 2):
+            f[steps] = f[steps - 1] + f[steps - 2]
+        return f[-1]
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        a, b = 0, 1
+        for x in range(n):
+            a, b = b, a + b
+        return b
+
+###########
 # 3. 
 class Solution:
     def climbStairs(self, n: int) -> int:
