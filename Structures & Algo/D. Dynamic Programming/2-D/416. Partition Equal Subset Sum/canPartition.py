@@ -1,3 +1,38 @@
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        total = sum(nums)
+        if total % 2: return False
+        target = total // 2
+        n = len(nums)
+
+        # @cache
+        # def dfs(start, left) -> bool:
+        #     if start == 0 and left == 0: return True
+        #     if start < 0 or left < 0: return False
+
+        #     return dfs(start - 1, left - nums[start]) or dfs(start - 1, left)
+        
+        # return dfs(n - 1, target)
+
+        # f = [[False] * (target + 1) for _ in range(n + 1)]
+        # f[0][0] = True
+        # for start in range(1, n + 1):
+        #     for left in range(target + 1):
+        #         if left - nums[start - 1] >= 0:
+        #             f[start][left] = f[start - 1][left - nums[start - 1]] or f[start - 1][left]
+        #         else:
+        #             f[start][left] = f[start - 1][left]
+        
+        # return f[n][target]
+
+        f = [False] * (target + 1)
+        f[0] = True
+        for start in range(1, n + 1):
+            x = nums[start - 1]
+            for left in range(target, x - 1, -1):
+                f[left] = f[left - x] or f[left]
+        return f[target]
+###
 ## def dfs(start, s) -> bool: # 能否让已选的数的和(s)与待选的数(下标>start)的和为target
 # 1. s starts from 0
 class Solution:
