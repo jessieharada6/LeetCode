@@ -1,3 +1,23 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        # @cache
+        # def dfs(i):
+        #     if i < 0: return 0
+        #     return max(nums[i] + dfs(i - 2), dfs(i - 1))
+        # return dfs(n - 1)
+
+        # f = [0] * (n + 2)
+        # for i in range(2, len(f)):
+        #     f[i] = max(nums[i - 2] + f[i - 2], f[i - 1])
+        # return f[-1]
+
+        a, b = 0, 0
+        for x in nums:
+            a, b = b, max(x + a, b)
+        return b
+
+###
 # 1.
 class Solution:
     def rob(self, nums: List[int]) -> int:

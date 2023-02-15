@@ -2,16 +2,16 @@ class Solution:
     def maxSubarraySumCircular(self, nums: List[int]) -> int:
         n = len(nums)
         
-        # 非空最大子数组和
-        most, b = nums[0], nums[0]
-        for i in range(1, n):
-            b = max(nums[i] + b, nums[i])
+        # 非空最大子数组和：1.中间的那段最大
+        most, b = -math.inf, -math.inf
+        for x in nums:
+            b = max(x + b, x)
             most = max(most, b)
         
-        # 非空最小子数组和
-        least, b = nums[0], nums[0]
-        for i in range(1, n):
-            b = min(nums[i] + b, nums[i])
+        # 非空最小子数组和：2.两头的那段最大 - 算出中间那段最小的值
+        least, b = math.inf, math.inf
+        for x in nums:
+            b = min(x + b, x)
             least = min(least, b)
         
         # 非空最小子数组和有可能会是全部

@@ -37,17 +37,22 @@ class Solution:
             if not node: return []
             if node.left is node.right:
                 return [[str(node.val)]]
-            
+            # l 和 r 接住当前的返回值paths
+            # l 和 r 是List[List[str]]
             l = dfs(node.left)
             r = dfs(node.right)
             
             paths = []
             # print(paths, "l", l, "r", r, node.val)
+            # >>> paths = []
+            # >>> paths.append([3, 4] + [5]) paths.append(数组+数组)
+            # >>> print(paths)
+            # [[3, 4, 5]]
             
             for path in l + r:               
                 paths.append(path + [str(node.val)]) #path是已有路径 是数组
 
-            return paths # 每一次return paths是当前层的左路径和右路径。 在新的一轮中 paths会是[]-左路径和右路径由l和r存储。
+            return paths # 每一次return paths是当前层的左路径l和右路径r。 在新的一轮中 paths会是[]-左路径和右路径由l和r存储。
 
         ans = []
         for nodes in dfs(root):

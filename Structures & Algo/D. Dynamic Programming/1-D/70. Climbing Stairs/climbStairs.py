@@ -1,4 +1,26 @@
-#
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # @cache
+        # def dfs(steps):
+        #     if steps == 0 or steps == 1: return 1  
+        #     return dfs(steps - 1) + dfs(steps - 2)
+
+        # return dfs(n)
+
+        # f = [0] * (n + 1)
+        # f[0] = 1 # 第0步
+        # f[1] = 1 # 第一步
+        # for i in range(2, n + 1):
+        #     f[i] = f[i - 1] + f[i - 2]
+
+        # return f[n]
+        
+        a, b = 1, 1 
+        for i in range(2, n + 1):
+            a, b = b, a + b
+        return b 
+        
+###
 class Solution:
     def climbStairs(self, n: int) -> int:
         @cache

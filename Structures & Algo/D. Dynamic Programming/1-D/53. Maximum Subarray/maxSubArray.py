@@ -1,5 +1,34 @@
 # 以i为结尾的非空最大子数组和
-#
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        # @cache
+        # def dfs(i):
+        #     if i == 0: return nums[0]
+
+        #     return max(nums[i] + dfs(i - 1), nums[i])
+        # return max(dfs(i) for i in range(n))
+
+        # f = [0] * n
+        # f[0] = nums[0]
+        # for i in range(1, n):
+        #     f[i] = max(nums[i] + f[i - 1], nums[i])
+        
+        # return max(f)
+
+        # ans, b = nums[0], nums[0]
+        # for i in range(1, n):
+        #     b = max(nums[i] + b, nums[i])
+        #     ans = max(ans, b)
+        # return ans
+
+        ans, b = -inf, -inf #还没有开始找非空subarray
+        for x in nums:
+            b = max(x + b, x)
+            ans = max(ans, b)
+        return ans
+
+###
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         n = len(nums)
