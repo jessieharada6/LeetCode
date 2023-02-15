@@ -17,7 +17,7 @@ class Solution:
         # f = [[False] * (target + 1) for _ in range(n + 1)]
         # f[0][0] = True
         # for start in range(1, n + 1):
-        #     for left in range(target + 1):
+        #     for left in range(target + 1): # 从0开始
         #         if left - nums[start - 1] >= 0:
         #             f[start][left] = f[start - 1][left - nums[start - 1]] or f[start - 1][left]
         #         else:
@@ -32,6 +32,7 @@ class Solution:
             for left in range(target, x - 1, -1):
                 f[left] = f[left - x] or f[left]
         return f[target]
+        
 ###
 ## def dfs(start, s) -> bool: # 能否让已选的数的和(s)与待选的数(下标>start)的和为target
 # 1. s starts from 0
