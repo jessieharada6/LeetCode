@@ -9,6 +9,14 @@ class Solution:
         #     return triangle[row][col] + min(dfs(row + 1, col), dfs(row + 1, col + 1))
         # return dfs(0, 0)
 
+        # @cache
+        # def dfs(row, col) -> int:
+        #     if col > row: return 0
+        #     if row == n - 1 or col == n - 1: return triangle[row][col]
+
+        #     return triangle[row][col] + min(dfs(row + 1, col), dfs(row + 1, col + 1))
+        # return dfs(0, 0)
+
         # f = [[0] * (r + 1) for r in range(n)]
         # for col in range(n): f[n - 1][col] = triangle[n - 1][col]
         # for r in range(n - 2, -1, -1):
