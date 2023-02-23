@@ -1,5 +1,30 @@
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
+        def isValid(s):
+            return s and (s == "0" or s[0] != "0" and 0 <= int(s) <= 255) # s and 空串直接返回false,之后无法判断会报错
+
+        n = len(s)
+        paths = []
+        def dfs(s, cnt, path) -> None:
+            # if len(path) == n + 3: return # 加入s and 不会再溢出
+            if cnt == 3: 
+                if isValid(s):
+                    paths.append(path + s)
+                    return
+                return
+            
+
+            for i in range(1, 4):
+                cur = s[:i]
+                if isValid(cur):
+                    dfs(s[i:], cnt + 1, path + cur + ".")
+
+        dfs(s, 0, "")
+        return paths
+        
+        
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
         ans = []
         def dfs(path, i):
             if i == len(s) and len(path) == len(s) + 3:

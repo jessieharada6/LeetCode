@@ -1,3 +1,37 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        paths = []
+        def dfs(left, path):
+            if len(path) == n * 2: 
+                paths.append(path)
+                return
+            
+            if left < n: # 在这里加限制，不用再进行最终判定
+                dfs(left + 1, path + "(")
+            if left > len(path) - left:
+                dfs(left, path + ")")
+        
+        dfs(0, "")
+        return paths
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        paths = []
+        def dfs(left, path):
+            if len(path) == n * 2: # 有可能是((((((
+                if left == n and len(path) - left == n: # 进行最终判断
+                    paths.append(path)
+                    return
+                return
+            
+            if left < n:
+                dfs(left + 1, path + "(")
+            if left > len(path) - left:
+                dfs(left, path + ")")
+        
+        dfs(0, "")
+        return paths
+
 # 只用两个变量
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
