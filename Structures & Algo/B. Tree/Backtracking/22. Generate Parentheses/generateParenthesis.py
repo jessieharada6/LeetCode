@@ -11,7 +11,7 @@ class Solution:
             if left > len(path) - left:
                 dfs(left, path + ")")
         
-        dfs(0, "")
+        dfs(0, "") 
         return paths
 
 class Solution:
