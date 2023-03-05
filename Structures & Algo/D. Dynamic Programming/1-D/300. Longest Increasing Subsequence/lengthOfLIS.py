@@ -9,7 +9,6 @@ class Solution:
         #         if nums[i] > nums[j]:
         #             mx = max(mx, dfs(j) + 1)
         #     return mx
-
         # return max(dfs(i) for i in range(n)) # 需要提供多个入口 因为最后一个数不一定是最大的-即不一定会组成最长子序列
 
         f = [1] * n

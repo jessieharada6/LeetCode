@@ -3,21 +3,20 @@ class Solution:
         n = len(nums)
         def check_pair(i):
             return i - 1 >= 0 and nums[i] == nums[i - 1]
-        def check_triplet(i):
-            return i - 2 >= 0 and nums[i] == nums[i - 1] == nums[i - 2] \
-            or (nums[i] == nums[i - 1] + 1 == nums[i - 2] + 2)
+        def check_triplets(i):
+            return i - 2 >= 0 and \
+            nums[i] == nums[i - 1] == nums[i - 2] or \
+            nums[i] == nums[i - 1] + 1 == nums[i - 2] + 2
 
         # @cache
-        # def dfs(i) -> bool:
+        # def dfs(i):
         #     if i < 0: return True
-            
-        #     res = False
-        #     if check_pair(i): 
-        #         res = dfs(i - 2) or res
-        #     if check_triplet(i): 
-        #         res = dfs(i - 3) or res
-        #     return res
 
+        #     res = False
+        #     if check_pair(i): res = res or dfs(i - 2)
+        #     if check_triplets(i): res = res or dfs(i - 3)
+        #     return res
+        
         # return dfs(n - 1)
         
         # @cache
@@ -27,23 +26,20 @@ class Solution:
         #     res = False
         #     if check_pair(i - 1): 
         #         res = dfs(i - 2) or res
-        #     if check_triplet(i - 1): 
+        #     if check_triplets(i - 1): 
         #         res = dfs(i - 3) or res
         #     return res
 
         # return dfs(n)
-
+    
         f = [False] * (n + 1)
-        f[0], f[1] = True, False # index: -1, 0
-        f[2] = nums[0] == nums[1] # index: 1 - 2 <= n <= 10^5
-        
-        res = False
+        # range: 2 <= n <= 10^5
+        # index: -1, 0, 1 
+        f[0], f[1], f[2] = True, False, nums[0] == nums[1]
         for i in range(3, n + 1):
             res = False
-            if check_pair(i - 1): 
-                res = f[i - 2] or res
-            if check_triplet(i - 1): 
-                res = f[i - 3] or res
+            if check_pair(i - 1): res = res or f[i - 2]
+            if check_triplets(i - 1): res = res or f[i - 3]
             f[i] = res
 
         return f[-1]
