@@ -8,7 +8,7 @@ class Solution:
         #     if not hold:
         #         return max(dfs(i + 1, False), dfs(i + 1, True) - prices[i])
         #     else:
-        #         return max(dfs(i + 1, True), dfs(i + 2, False) + prices[i]) # 不持有持续到第三天
+        #         return max(dfs(i + 1, True), dfs(i + 2, False) + prices[i]) # 不持有持续到第i+2天
         # return dfs(0, False)
 
         # @cache
@@ -19,7 +19,7 @@ class Solution:
         #     if not hold:
         #         return max(dfs(i - 1, False), dfs(i - 1, True) + prices[i])
         #     else:
-        #         return max(dfs(i - 1, True), dfs(i - 2, False) - prices[i]) # 不持有持续到第三天
+        #         return max(dfs(i - 1, True), dfs(i - 2, False) - prices[i]) # 不持有持续到第i+2天
         # return dfs(n - 1, False)
 
         if n < 2: return 0
