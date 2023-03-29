@@ -50,4 +50,40 @@ class Solution:
                     f[left][right] = max(f[left + 1][right], f[left][right - 1]) 
         return f[0][n - 1]
 
+        # @cache
+        # def dfs(left, right):
+        #     if left > right:
+        #         return 0
+        #     if left == right:
+        #         return 1
+
+        #     if s[left] == s[right]:
+        #         return dfs(left + 1, right - 1) + 2
+        #     return max(dfs(left + 1, right), dfs(left, right - 1))
+        # return dfs(0, n - 1)
+
+        # f = [[0] * (n) for _ in range(n)]
+        
+        # for left in range(n - 1, -1, -1): 
+        #     for right in range(left, n):
+        #         if left == right:
+        #             f[left][left] = 1; continue
+        #         if s[left] == s[right]:
+        #             f[left][right] = f[left + 1][right - 1] + 2
+        #         else:
+        #             f[left][right] = max(f[left + 1][right], f[left][right - 1]) 
+        # return f[0][n - 1]
+
+
+        f = [[0] * (n) for _ in range(n)]
+
+        for left in range(n - 1, -1, -1): 
+            f[left][left] = 1
+            for right in range(left + 1, n):
+                if s[left] == s[right]:
+                    f[left][right] = f[left + 1][right - 1] + 2
+                else:
+                    f[left][right] = max(f[left + 1][right], f[left][right - 1]) 
+        return f[0][n - 1]
+
         
