@@ -4,6 +4,35 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        def dfs(node):
+            # 空节点被cam覆盖: inf - 空节点不可放cam，给一个无限值，由于求最小，所以给最大无限值
+            if node is None: return inf, 0, 0 
+
+            l1,l2,l3 = dfs(node.left)
+            r1,r2,r3 = dfs(node.right)
+
+            # 当前节点被cam覆盖
+            #   随意搭配：小孩和长辈可有可无 + 1(当前节点的cam)
+            w_cam = min(l1,l2,l3) + min(r1,r2,r3) + 1 
+            # 当前节点被小孩覆盖
+            #    左右小孩都有cam
+            #    左小孩有cam 右小孩没有cam
+            #    左小孩没有cam 右小孩有cam
+            no_cam_but_children = min(l1 + r1, l1 + r2, l2 + r1)
+            # 当前节点被长辈覆盖：但是长辈我们不知道情况，换个角度看小孩
+            #    左右小孩都有cam 
+            #    左小孩有cam 右小孩没有cam
+            #    左小孩没有cam 右小孩有cam
+            #    左右小孩都没有cam - 反正长辈有cam
+            no_cam_but_parent = min(l1,l2) + min(r1,r2)
+
+            return w_cam, no_cam_but_children, no_cam_but_parent
+        
+        res = dfs(root)
+        return min(res[0], res[1]) # 此时是root不会有长辈
 class Solution:
     def minCameraCover(self, root: Optional[TreeNode]) -> int:
         def dfs(node):
