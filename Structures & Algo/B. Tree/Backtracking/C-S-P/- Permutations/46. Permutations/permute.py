@@ -173,3 +173,39 @@ class Solution:
         
         traverse([], nums)
         return paths
+
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        ans = []
+        def dfs(s, path):
+            if len(s) == 0:
+                ans.append(path)
+                return
+            
+            for x in s:
+                dfs(s - {x}, path + [x])
+        
+        dfs(set(nums), [])
+        return ans
+
+        
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        arr = []
+        path = []
+
+        def dfs(idx):
+            if len(idx) == 0:
+                arr.append(path[:])
+                return
+            for i, j in enumerate(idx):
+                path.append(nums[j])
+                dfs(idx[:i] + idx[i + 1:])
+                path.pop()
+
+        dfs(tuple(range(n)))
+        return arr
+    
