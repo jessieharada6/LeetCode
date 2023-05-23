@@ -7,7 +7,7 @@ class Solution:
             if len(idx) == 0:
                 return 0
             res = inf
-            i = n - len(idx) # 当前层数
+            i = n - len(idx) # 当前层数 -- # len(idx) 集合大小
             for idx_i, j in enumerate(idx):
                 cur = (nums1[i] ^ nums2[j]) + dfs(idx[:idx_i] + idx[idx_i + 1:])
                 res = min(res, cur)
