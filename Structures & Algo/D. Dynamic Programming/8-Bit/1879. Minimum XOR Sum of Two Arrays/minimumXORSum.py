@@ -14,3 +14,33 @@ class Solution:
             return res
              
         return dfs(tuple(range(n)))
+
+class Solution:
+    def minimumXORSum(self, nums1: List[int], nums2: List[int]) -> int:
+        n = len(nums2)
+        # @cache
+        # def dfs(left) -> int: 
+        #     if left == 0:
+        #         return 0
+        #     res = inf
+        #     i = n - left.bit_count()
+        #     for j in range(n):
+        #         if (left >> j) & 1:
+        #             cur = (nums1[i] ^ nums2[j]) + dfs(left ^ (1 << j))
+        #             res = min(res, cur)
+        #     return res
+             
+        # return dfs((1 << n) - 1) #用bits表示下标的位置
+
+        f = [0] * (1 << n) # 用来装结果
+        for left in range(1, (1 << n)): # 循环下标
+            res = inf
+            for j in range(n):
+                if (left >> j) & 1:
+                    i = n - left.bit_count()
+                    cur = (nums1[i] ^ nums2[j]) + f[left ^ (1 << j)]
+                    res = min(res, cur)
+            f[left] = res
+        return f[-1]
+
+        

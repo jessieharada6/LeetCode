@@ -1,5 +1,60 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        s = sum(nums)
+        if s % 2: return False
+        target = s // 2
+
+        # @cache
+        # def dfs(start, left):
+        #     if start == -1 and left == 0: # start==-1表示数组还未开始
+        #         return True
+        #     if left < 0 or start < 0:
+        #         return False
+        #     return dfs(start - 1, left - nums[start]) or dfs(start - 1, left)
+        
+        # return dfs(n - 1, target)
+
+        # @cache
+        # def dfs(start, left):
+        #     if start == 0 and left == 0:
+        #         return True
+        #     if left < 0 or start < 0:
+        #         return False
+        #     return dfs(start - 1, left - nums[start - 1]) or dfs(start - 1, left)
+        
+        # return dfs(n, target)
+
+        # f = [[False] * (target + 1) for _ in range(n + 1)]
+        # f[0][0] = True
+        # for start in range(1, n + 1):
+        #     for left in range(target + 1):
+        #         if left - nums[start - 1] >= 0:
+        #             f[start][left] = f[start - 1][left - nums[start - 1]] or f[start - 1][left]
+        #         else:
+        #             f[start][left] = f[start - 1][left]
+        # return f[-1][-1]
+
+        # f = [False] * (target + 1)
+        # f[0] = True
+        # for start in range(1, n + 1):
+        #     for left in range(target, -1, -1):
+        #         if left - nums[start - 1] >= 0:
+        #             f[left] = f[left - nums[start - 1]] or f[left]
+        # return f[-1]
+
+        f = [False] * (target + 1)
+        f[0] = True
+        for start in range(1, n + 1):
+            x = nums[start - 1] # if left - nums[start - 1] >= 0 --> left >= nums[start - 1]
+            for left in range(target, x -1, -1):
+                f[left] = f[left - nums[start - 1]] or f[left]
+        return f[-1]
+        
+
+##############################################################################
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
         total = sum(nums)
         if total % 2: return False
         target = total // 2
