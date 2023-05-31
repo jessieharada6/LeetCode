@@ -17,6 +17,35 @@ class Solution:
 
 class Solution:
     def minimumXORSum(self, nums1: List[int], nums2: List[int]) -> int:
+        n = len(nums1)
+        # @cache
+        # def dfs(left):
+        #     if left == 0: return 0
+        #     i = n - left.bit_count()
+
+        #     res = inf
+        #     for j in range(n):
+        #         if (left >> j) & 1:
+        #             cur = (nums1[i] ^ nums2[j]) + dfs(left ^ (1 << j))
+        #             res = min(res, cur)
+        #     return res
+        
+        # return dfs((1 << n) - 1)
+
+        f = [0] * (1 << n)
+        for left in range(1, 1 << n): # if left == 0: return 0
+            i = n - left.bit_count()
+            res = inf
+            for j in range(n):
+                if (left >> j) & 1:
+                    cur = (nums1[i] ^ nums2[j]) + f[left ^ (1 << j)]
+                    res = min(res, cur)
+            f[left] = res
+        return f[-1]
+
+##############################3
+class Solution:
+    def minimumXORSum(self, nums1: List[int], nums2: List[int]) -> int:
         n = len(nums2)
         # @cache
         # def dfs(left) -> int: 
