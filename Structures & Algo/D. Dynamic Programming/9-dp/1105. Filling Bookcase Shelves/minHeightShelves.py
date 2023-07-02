@@ -4,6 +4,40 @@ class Solution:
 
         # @cache
         # def dfs(left):
+        #     if left == n: return 0
+        #     res = inf
+        #     h = 0
+        #     w = 0
+        #     for nxt in range(left + 1, n + 1):
+        #         w += books[nxt - 1][0]
+        #         if w > shelfWidth: continue
+        #         h = max(h, books[nxt - 1][1])
+        #         res = min(res, h + dfs(nxt))
+        #     return res
+        # return dfs(0)
+
+        f = [inf] * n + [0]
+        for left in range(n - 1, -1, -1):
+            # if left == n: f[left] = 0
+            res = inf
+            h = 0
+            w = 0
+            for nxt in range(left + 1, n + 1):
+                w += books[nxt - 1][0]
+                if w > shelfWidth: continue
+                h = max(h, books[nxt - 1][1])
+                res = min(res, h + f[nxt])
+            f[left] = res
+        # print(f)
+        return f[0]
+        
+        
+class Solution:
+    def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+        n = len(books)
+
+        # @cache
+        # def dfs(left):
         #     if left < 0: return 0
         #     res = inf
         #     h = 0
