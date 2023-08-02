@@ -24,4 +24,38 @@ class Solution:
                     f[curIdx][delete] = max(f[curIdx - 1][0], f[curIdx - 1][1] + arr[curIdx - 1], arr[curIdx - 1]) 
 
         return max(max(f[i][1], f[i][0]) for i in range(1, n + 1))
-                
+
+
+# 前后缀分解
+class Solution:
+    def maximumSum(self, arr: List[int]) -> int:
+        n = len(arr)
+        # 以i結尾的最大子數組的和
+        # @cache
+        # def dfsEnd(i):
+        #     if i < 0: return -inf
+        #     return max(arr[i], arr[i] + dfsEnd(i - 1))
+
+        # # 以i開頭的最大子數組的和
+        # @cache
+        # def dfsStart(i):
+        #     if i == n: return -inf
+        #     return max(arr[i], arr[i] + dfsStart(i + 1))
+
+        # one_deletion = max(dfsEnd(i - 1) + dfsStart(i + 1) for i in range(n))
+        # deletion = max(dfsEnd(i) for i in range(n))
+
+        # return max(one_deletion, deletion)
+
+        f = [-inf] + [0] * n
+        g = [0] * n + [-inf]
+
+        for i in range(1, n + 1):
+            f[i] = max(arr[i - 1], arr[i - 1] + f[i - 1])
+        
+        for i in range(n - 1, -1, -1):
+            g[i] = max(arr[i], arr[i] + g[i + 1])
+
+        one_deletion = max(f[i] + g[i + 1] for i in range(n))
+        deletion = max(f[i + 1] for i in range(n))
+        return max(one_deletion, deletion)                
