@@ -10,3 +10,34 @@ class Solution:
             return 0 if res == inf else res # e.g. 当l==cut, res = inf
         
         return dfs(0, n)
+
+class Solution:
+    def minCost(self, n: int, cuts: List[int]) -> int:
+        cuts.sort()
+        cuts = [0] + cuts + [n]
+
+        @cache
+        def dfs(l ,r):
+            res = inf
+            for i in range(l + 1, r):
+                res = min(res, dfs(l, i) + dfs(i, r))
+            res += cuts[r] - cuts[l]
+            return 0 if res == inf else res
+
+        
+        return dfs(0, len(cuts) - 1)
+
+class Solution:
+    def minCost(self, n: int, cuts: List[int]) -> int:
+        cuts.sort()
+        cuts = [0] + cuts + [n]
+
+        @cache
+        def dfs(l ,r):
+            res = inf
+            for i in range(l + 1, r):
+                res = min(res, dfs(l, i) + dfs(i, r) + cuts[r] - cuts[l])
+            return 0 if res == inf else res
+
+        
+        return dfs(0, len(cuts) - 1)
