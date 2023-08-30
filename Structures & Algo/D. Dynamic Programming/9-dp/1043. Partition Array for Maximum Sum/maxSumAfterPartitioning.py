@@ -1,6 +1,20 @@
 class Solution:
     def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
         n = len(arr)
+        @cache
+        def dfs(i):
+            res, curMax = 0, 0
+            for j in range(i, max(i - k, -1), -1):
+                curMax = max(curMax, arr[j])
+                # dfs(j - 1) 缩小范围 剩余的arr在可以改变至多k个值的情况下的最大值
+                res = max(res, dfs(j - 1) + curMax * (i - j + 1))
+            return res
+
+        return dfs(n - 1)
+
+class Solution:
+    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+        n = len(arr)
         #以i为结尾的 长度最多是k的 max val sum
         @cache
         def dfs(i):
