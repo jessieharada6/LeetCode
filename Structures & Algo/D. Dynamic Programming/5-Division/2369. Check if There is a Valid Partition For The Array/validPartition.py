@@ -1,6 +1,24 @@
 class Solution:
     def validPartition(self, nums: List[int]) -> bool:
         n = len(nums)
+        @cache
+        def dfs(i):
+            if i < 0:  #当所有组合都比较完成 才会进入这个condition 此时已经有有效分割 所以return True
+                return True 
+            res = False
+            
+            if nums[i] == nums[i - 1]:
+                res = res or dfs(i - 2)
+            if (nums[i] == nums[i - 1] == nums[i - 2]) or (nums[i] == nums[i - 1] + 1 == nums[i - 2] + 2):
+                res = res or dfs(i - 3)
+
+            return res # [1,5]会返回false 因为不会进入if
+        
+        return dfs(n - 1)
+
+class Solution:
+    def validPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
         def check_pair(i):
             return i - 1 >= 0 and nums[i] == nums[i - 1]
         def check_triplets(i):
