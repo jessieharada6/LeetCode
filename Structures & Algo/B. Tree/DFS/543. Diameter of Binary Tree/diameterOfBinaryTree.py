@@ -4,6 +4,24 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        ans = 0 #左右路径总和
+        @cache
+        def dfs(node): #返回在当前节点最长的路径 （来自左路径或右路径）
+            if node is None: return -1
+
+            l = dfs(node.left) + 1
+            r = dfs(node.right) + 1
+
+            nonlocal ans
+            ans = max(ans, l + r)
+            return max(l, r)
+        
+        dfs(root)
+        return ans
+    
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         self.cur = 0
