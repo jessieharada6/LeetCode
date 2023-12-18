@@ -4,53 +4,18 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        ans = 0 #左右路径总和
+        ans = 0
         @cache
-        def dfs(node): #返回在当前节点最长的路径 （来自左路径或右路径）
+        def dfs(node): #返回在当前节点最长的路径 （来自左路径或右路径） 不管当前节点下面怎么绕来绕去 取左或右的最大值
+            nonlocal ans
             if node is None: return -1
 
             l = dfs(node.left) + 1
             r = dfs(node.right) + 1
-
-            nonlocal ans
+            print(l, r, node.val)
             ans = max(ans, l + r)
-            return max(l, r)
-        
+            return max(l, r) # [3,1,null,null,2] get max when node 1's right child can be counted as 1 diameter
         dfs(root)
         return ans
-    
-class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        self.cur = 0
-        def depth(root):
-            if root is None:
-                return 0
-            
-            l = depth(root.left)
-            r = depth(root.right)
-            
-            self.cur = max(self.cur, l + r)     # every node: left and right side
-            
-            return max(l, r) + 1                # every node: max depth - either left or right
-        
-        return depth(root)
-
-class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        d = 0
-        def depth(root):
-            nonlocal d
-            if root is None:
-                return 0
-            
-            l = depth(root.left)
-            r = depth(root.right)
-            
-            d = max(d, l + r)
-            
-            return max(l, r) + 1
-        depth(root)
-        return d
