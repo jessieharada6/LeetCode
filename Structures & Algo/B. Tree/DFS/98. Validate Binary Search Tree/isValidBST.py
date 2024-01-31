@@ -7,6 +7,38 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        # isValid = True
+        prev = -inf
+        def dfs(node):
+            if node is None: return True
+            l = dfs(node.left)
+            nonlocal prev
+            if node.val <= prev:
+                return False
+            prev = node.val
+            r = dfs(node.right)
+            return l and r
+        return dfs(root)
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        isValid = True
+        prev = -inf
+        def dfs(node):
+            
+            if node is None: return
+            dfs(node.left)
+            nonlocal prev
+            if node.val <= prev:
+                nonlocal isValid
+                isValid = False
+            prev = node.val
+            dfs(node.right)
+        dfs(root)
+        return isValid
+    
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
         def dfs(node):
             if node is None:
                 # 保证不进入if条件
