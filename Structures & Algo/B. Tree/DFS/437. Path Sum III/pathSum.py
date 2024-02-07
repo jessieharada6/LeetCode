@@ -30,7 +30,32 @@ class Solution:
 
         dfs(root, 0)
         return ans
-    
+
+# 给你一棵二叉树，你需要算出有多少个从上到下的路径（和 437 的定义是一样的）
+# 必须满足，路径上的节点值都是 0
+# test case
+# [1,-1,0,0,null,0,0,0,0,null,null,0,1]
+#关键点：连续的0
+class Solution:
+    def countAllZeroPaths(self, root: Optional[TreeNode]) -> int:
+        ans = 0
+        def dfs(node, zero):
+            if node is None: return
+            nonlocal ans
+            if node.val == 0:
+                zero += 1
+                ans += zero
+            else:
+                zero = 0
+            
+            dfs(node.left, zero)
+            dfs(node.right, zero)
+
+        dfs(root, 0)
+        return ans
+
+
+######################################################################   
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         ans = 0
