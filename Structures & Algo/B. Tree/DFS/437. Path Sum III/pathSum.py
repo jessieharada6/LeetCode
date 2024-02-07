@@ -5,6 +5,32 @@
 #         self.left = left
 #         self.right = right
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        cnt = Counter()
+        cnt[0] = 1
+        ans = 0
+        def dfs(node, prefix_sum):
+            if node is None: return
+            prefix_sum += node.val # add current node.val
+            if prefix_sum - targetSum in cnt:
+                nonlocal ans
+                ans += cnt[prefix_sum - targetSum]
+            
+            cnt[prefix_sum] += 1  # add to cnt after passing the current node
+            dfs(node.left, prefix_sum)
+            dfs(node.right, prefix_sum)
+            cnt[prefix_sum] -= 1
+
+        dfs(root, 0)
+        return ans
+    
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         ans = 0
