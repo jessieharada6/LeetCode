@@ -1,5 +1,46 @@
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
+        m, n = len(board), len(board[0])
+
+        def dfs(i, j):
+            # current executation
+           if board[i][j] == "X": return
+           if board[i][j] == "#": return
+           board[i][j] = "#" 
+           # end of current executation
+           # next step
+           for x, y in (i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1):
+                if 0 <= x < m and 0 <= y < n:
+                    dfs(x, y)
+
+        # def dfs(i, j):
+        #     if i < 0 or i >= m or j < 0 or j >= n: return
+            
+        #     if board[i][j] == "X": return
+        #     if board[i][j] == "#": return
+
+        #     board[i][j] = "#"
+        #     for x, y in (i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1):
+        #         dfs(x, y)
+
+        
+        for i in range(m):
+            for j in range(n):
+                if i == 0 or j == 0 or i == m - 1 or j == n - 1:
+                    if board[i][j] == "O":
+                        dfs(i, j)
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == "O":
+                    board[i][j] = "X"
+                if board[i][j] == "#":
+                    board[i][j] = "O"
+        
+
+
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
         def dfs(row, col):
             if row < 0 or col < 0 or row >= len(board) or col >= len(board[0]):
                 return
